@@ -6,6 +6,7 @@ from dragon_star.dragon_star.models.data.slots.equip_slots import DragonEquipSlo
 
 BASIC_DRAGONS = ('Drake', 'Dragon', 'Wyvern', 'Wyrm', 'Lindwurm')
 
+
 class DragonData(BaseData):
     Name: str
     ShortDescription: str
