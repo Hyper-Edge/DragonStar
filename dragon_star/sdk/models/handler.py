@@ -13,7 +13,7 @@ class Handler(_BaseModel):
     def to_dict(self):
         return dict(
             Name=self.Name,
-            Model=self.RequestClass.__name__,
-            Data=self.ResponseClass.__name__,
+            RequestClass=self.RequestClass.__name__,
+            ResponseClass=self.ResponseClass.__name__,
             Code=self.Code
         )
