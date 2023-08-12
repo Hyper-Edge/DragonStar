@@ -23,7 +23,7 @@ class Cost(pydantic.BaseModel):
         return dict(
             Erc721Costs=[],
             Erc1155Costs=[dict(
-                ItemId=item.id,
+                ItemId=f'{type(item).__name__}/{item.id}',
                 Amount=amount
             ) for item, amount in self.items]
         )

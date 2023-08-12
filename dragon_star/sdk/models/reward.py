@@ -26,7 +26,7 @@ class Reward(pydantic.BaseModel):
         return dict(
             Erc721Rewards=[],
             Erc1155Rewards=[dict(
-                ItemId=item.id,
+                ItemId=f'{type(item).__name__}/{item.id}',
                 Amount=amount
             ) for item, amount in self.items]
         )

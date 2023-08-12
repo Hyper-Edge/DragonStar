@@ -17,6 +17,7 @@ exp = 100
 step = 100
 for lvl in range(1, 40):
     #FIXME
-    BasicDragonCommonLadder.add_level(DragonLadder.ladder_level_data_class(id=f'xx{lvl}', Exp=exp, Data=DragonLadderLevelData(id=f'xx{lvl}')))
+    level_data = DragonLadder.ladder_level_data_class(id=f'xx{lvl}', Exp=exp, Data=DragonLadderLevelData(id=f'xx{lvl}'))
+    BasicDragonCommonLadder.add_level(level_data)
     exp += step
     step += 100

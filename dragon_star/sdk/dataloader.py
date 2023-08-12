@@ -9,13 +9,6 @@ from dragon_star.sdk.models.base import _BaseModel
 from dragon_star.sdk.models import *
 
 
-class DataRefEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, DataRef):
-            return obj.ref_str if obj else None
-        return json.JSONEncoder.default(self, obj)
-
-
 def datainst_to_json(cls, data_inst):
     flds = []
     for fname, fdef in cls.__fields__.items():
@@ -23,7 +16,7 @@ def datainst_to_json(cls, data_inst):
             continue
         t_origin = typing.get_origin(fdef.outer_type_)
         fval = getattr(data_inst, fname)
-        flds.append({'Name': fname, 'Value': fval})
+        flds.append({'Name': fname, 'Value': json.dumps(fval)})
     #
     return dict(
         Name=data_inst.id,
@@ -100,7 +93,7 @@ class DataLoader(object):
 
     def to_json(self):
         data = self.to_dict()
-        return json.dumps(data, cls=DataRefEncoder, indent=4)
+        return json.dumps(data, indent=4)
 
     def to_dict(self):
         data_class_instances = {}

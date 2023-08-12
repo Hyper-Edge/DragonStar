@@ -9,14 +9,19 @@ from .reward import Reward
 from .cost import Cost
 
 
-class GenericLadderLevel(BaseData):
-    Exp: typing.Optional[int]
-    Reward: typing.Optional[Reward]
-    Cost: typing.Optional[Cost]
-    Conditions: typing.Optional[typing.List[str]]
-    
-    class Config:
-        arbitrary_types_allowed = True
+class GenericLadderLevel(pydantic.BaseModel):
+    Exp: int = 0
+    Reward: typing.Optional[Reward] = None
+    Cost: typing.Optional[Cost] = None
+    Conditions: typing.List[str] = optional_field(list())
+
+    def to_dict(self):
+        return dict(
+            Exp=self.Exp,
+            Reward=self.Reward.to_dict() if self.Reward else None,
+            Cost=self.Cost.to_dict() if self.Cost else None,
+            Conditions=self.Conditions
+        )
 
 
 class GenericLadder(pydantic.BaseModel):

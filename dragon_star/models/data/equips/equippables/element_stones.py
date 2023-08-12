@@ -12,9 +12,8 @@ from dragon_star.models.data.tier import *
 ################################################################################
 STONES_BY_ELEMENT = {el_data: dict() for el_data in ElementData.instances()}
 
-
-for el_data in ElementData.instances():
-    for ti, tier_data in enumerate(ALL_TIERS):
+for ti, tier_data in enumerate(ALL_TIERS):
+    for el_data in ElementData.instances():
         if tier_data == TIER_C:
             continue
         stone_data = DragonEquippableData.define(
@@ -24,9 +23,12 @@ for el_data in ElementData.instances():
             Tier=tier_data)
         #
         STONES_BY_ELEMENT[el_data][tier_data] = stone_data
-        craft_rule = CraftRule(f'{stone_data}.Name crafting')
-        craft_rule.require(stone_data, 3)
-        craft_rule.produce(stone_data, 1)
+        minor_tier = prev_tier(tier_data)
+        if minor_tier and minor_tier != TIER_C:
+            req_stone = STONES_BY_ELEMENT[el_data][minor_tier]
+            craft_rule = CraftRule(f'craft_rule_{stone_data.id}')
+            craft_rule.require(req_stone, 3)
+            craft_rule.produce(stone_data, 1)
 
 
 DE_ELEMENT_STONE = DragonEquippableData.define(
