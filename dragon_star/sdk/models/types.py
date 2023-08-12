@@ -54,7 +54,7 @@ def get_cs_type(fdef: type):
     elif t_origin:
         t_args = typing.get_args(fdef)
         if t_origin is typing.Optional:
-            return get_cs_type(t_args[0])
+            return f"Optional<{get_cs_type(t_args[0])}>"
         elif t_origin is list:
             return f"List<{get_cs_type(t_args[0])}>"
         elif t_origin is dict:

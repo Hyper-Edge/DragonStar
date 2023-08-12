@@ -16,7 +16,9 @@ def datainst_to_json(cls, data_inst):
             continue
         t_origin = typing.get_origin(fdef.outer_type_)
         fval = getattr(data_inst, fname)
-        flds.append({'Name': fname, 'Value': json.dumps(fval)})
+        if t_origin is list:
+            fval = json.dumps(fval)
+        flds.append({'Name': fname, 'Value': fval})
     #
     return dict(
         Name=data_inst.id,

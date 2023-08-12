@@ -37,7 +37,7 @@ DE_ELEMENT_STONE = DragonEquippableData.define(
     Slot=DE_ELEMENT_STONE,
     Tier=TIER_SSR
 )
-DE_ELEMENT_STONE_CRAFT = CraftRule('')
+DE_ELEMENT_STONE_CRAFT = CraftRule(f'craft_rule_{DE_ELEMENT_STONE.id}')
 for el_data in ElementData.instances():
     DE_ELEMENT_STONE_CRAFT.require(STONES_BY_ELEMENT[el_data][TIER_SSR])
-DE_ELEMENT_STONE_CRAFT.produce(DE_ELEMENT_STONE, 1)
+DE_ELEMENT_STONE_CRAFT.produce(DE_ELEMENT_STONE)
