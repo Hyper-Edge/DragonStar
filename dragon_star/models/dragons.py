@@ -1,7 +1,7 @@
-from dragon_star.dragon_star.sdk.models import BaseData, DataModel
-from dragon_star.dragon_star.models.data.dragons.dragon import *
+from dragon_star.sdk.models import BaseData, DataModel
+from dragon_star.models.data.dragons.dragon import *
 
-from dragon_star.dragon_star.sdk.models.progression import ProgressionLadder
+from dragon_star.sdk.models.progression import ProgressionLadder
 
 
 class Dragon(DataModel):

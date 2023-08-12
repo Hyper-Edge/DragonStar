@@ -1,6 +1,6 @@
-from dragon_star.dragon_star.models.data.element import *
-from dragon_star.dragon_star.models.data.affinity import *
-from dragon_star.dragon_star.models.data.tier import *
+from dragon_star.models.data.element import *
+from dragon_star.models.data.affinity import *
+from dragon_star.models.data.tier import *
 
 
 class RiderExpMaterialData(BaseData):
@@ -23,6 +23,7 @@ _AFFINITY_TO_KNOWLEDGE_DRIVE_NAME = {
 for a_idx, affinity_data in enumerate(AffinityData.instances()):
     for tier_data in [TIER_R, TIER_SR, TIER_SSR]:
         RiderExpMaterialData.define(
+            id=f'rider_upgrade_{affinity_data.id}_{tier_data.id}',
             Name=f'{_AFFINITY_TO_KNOWLEDGE_DRIVE_NAME[affinity_data.id]} Knowledge Drive',
             Description='',
             Tier=tier_data,

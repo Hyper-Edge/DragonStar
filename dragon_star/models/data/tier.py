@@ -1,6 +1,6 @@
 import typing
 
-from dragon_star.dragon_star.sdk.models import BaseData
+from dragon_star.sdk.models import BaseData
 
 
 class TierData(BaseData):
@@ -8,18 +8,24 @@ class TierData(BaseData):
     Symbol: str
 
 
-TIER_C = TierData.define(Symbol='C', Name='Common')
-TIER_U = TierData.define(Symbol='U', Name='Uncommon')
-TIER_R = TierData.define(Symbol='R', Name='Rare')
-TIER_SR = TierData.define(Symbol='SR', Name='SuperRare')
-TIER_SSR = TierData.define(Symbol='SSR', Name='UltraRare')
+TIER_C = TierData.define(id='common', Symbol='C', Name='Common')
+TIER_U = TierData.define(id='uncommon', Symbol='U', Name='Uncommon')
+TIER_R = TierData.define(id='rare', Symbol='R', Name='Rare')
+TIER_SR = TierData.define(id='super_rare', Symbol='SR', Name='SuperRare')
+TIER_SSR = TierData.define(id='ultra_rare', Symbol='SSR', Name='UltraRare')
 
 ALL_TIERS = TierData.instances()
 
 
 def prev_tier(tier: TierData) -> typing.Optional[TierData]:
-    pass
+    for jj, t in enumerate(ALL_TIERS[1:]):
+        if t == tier:
+            return ALL_TIERS[jj]
+    return None
 
 
 def next_tier(tier: TierData) -> typing.Optional[TierData]:
-    pass
+    for jj, t in enumerate(ALL_TIERS[:-1]):
+        if t == tier:
+            return ALL_TIERS[jj+1]
+    return None

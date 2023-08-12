@@ -21,6 +21,14 @@ class DataModelTemplate(object):
         self._cls = cls
         self._data = data
 
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, v):
+        return v
+
 
 class DataModel(_BaseModel, metaclass=DataModelMeta):
     _abstract = True

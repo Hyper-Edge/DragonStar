@@ -1,14 +1,14 @@
 import typing
 
-from dragon_star.dragon_star.sdk.models import BaseData, DataRef
-from dragon_star.dragon_star.models.data.tier import *
+from dragon_star.sdk.models import BaseData, DataRef, optional_field
+from dragon_star.models.data.tier import *
 
 
 class MetalData(BaseData):
     Name: str
-    Description: str
+    Description: str = optional_field('')
     Tier: DataRef[TierData]
-    HasMetallicDragon: typing.Optional[bool] = False
+    HasMetallicDragon: bool = optional_field(False)
 
 
 METAL_COPPER = MetalData.define(

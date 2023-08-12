@@ -1,5 +1,5 @@
-from dragon_star.dragon_star.sdk.models import BaseData
-from dragon_star.dragon_star.sdk.models.reward import Reward
+from dragon_star.sdk.models import BaseData
+from dragon_star.sdk.models.reward import Reward
 
 
 class AchievementData(BaseData):

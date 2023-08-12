@@ -1,6 +1,6 @@
-from dragon_star.dragon_star.sdk.models.types import Ulid
-from dragon_star.dragon_star.sdk.models.base import _BaseModel
-from dragon_star.dragon_star.sdk.models.handler import Handler
+from dragon_star.sdk.models.types import Ulid
+from dragon_star.sdk.models.base import _BaseModel
+from dragon_star.sdk.models.handler import Handler
 
 
 class RetireDragonReq(_BaseModel):

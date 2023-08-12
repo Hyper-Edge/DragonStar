@@ -1,5 +1,5 @@
-from dragon_star.dragon_star.sdk.models import BaseData, DataRef
-from dragon_star.dragon_star.models.data.tier import *
+from dragon_star.sdk.models import BaseData, DataRef
+from dragon_star.models.data.tier import *
 
 
 class DragonEquipSlotData(BaseData):

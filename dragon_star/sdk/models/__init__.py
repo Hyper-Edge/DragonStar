@@ -1,3 +1,4 @@
+from .types import optional_field
 from .data import DataRef, BaseData
 from .models import *
 from .inventory import Inventory

@@ -1,7 +1,7 @@
-from dragon_star.dragon_star.sdk.models import BaseData, DataRef
-from dragon_star.dragon_star.models.data.element import *
-from dragon_star.dragon_star.models.data.affinity import *
-from dragon_star.dragon_star.models.data.tier import *
+from dragon_star.sdk.models import BaseData, DataRef
+from dragon_star.models.data.element import *
+from dragon_star.models.data.affinity import *
+from dragon_star.models.data.tier import *
 
 
 class DragonEquippableExpMaterialData(BaseData):
@@ -10,7 +10,7 @@ class DragonEquippableExpMaterialData(BaseData):
     Value: int
     Tier: DataRef[TierData]
     Affinity: DataRef[AffinityData]
-    DraxPerValue: typing.Optional[int] = 0
+    DraxPerValue: int = optional_field(0)
 
 
 ################################################################################
@@ -19,6 +19,7 @@ class DragonEquippableExpMaterialData(BaseData):
 for el_data in ElementData.instances():
     for tier_data in [TIER_R, TIER_SR, TIER_SSR]:
         DragonEquippableExpMaterialData.define(
+            id=f'dragon_equip_exp_mat_elem_{el_data.id}_{tier_data.id}',
             Name='Elemental Essence Crystal',
             Description='',
             Tier=tier_data,
@@ -38,6 +39,7 @@ _AFFINITY_TO_CRYSTAL_NAME = {
 for a_idx, affinity_data in enumerate(AffinityData.instances()):
     for tier_data in [TIER_R, TIER_SR, TIER_SSR]:
         DragonEquippableExpMaterialData.define(
+            id=f'dragon_equip_exp_mat_{affinity_data.id}_{tier_data.id}',
             Name=f'{_AFFINITY_TO_CRYSTAL_NAME[affinity_data.id]} Crystal',
             Description='',
             Tier=tier_data,

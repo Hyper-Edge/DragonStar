@@ -14,7 +14,11 @@ def datainst_to_json(cls, data_inst):
     for fname, fdef in cls.__fields__.items():
         if fname == 'id':
             continue
-        flds.append({'Name': fname, 'Value': getattr(data_inst, fname)})
+        t_origin = typing.get_origin(fdef.outer_type_)
+        fval = getattr(data_inst, fname)
+        if t_origin is DataRef:
+            fval = fval.ref_str if fval else None
+        flds.append({'Name': fname, 'Value': fval})
     #
     return dict(
         Name=data_inst.id,
@@ -97,7 +101,7 @@ class DataLoader(object):
         data_class_instances = {}
         #
         for cls in BaseData.dataclasses():
-            for data_inst in BaseData.instances(cls):
+            for data_inst in cls.instances():
                 j = datainst_to_json(cls, data_inst)
                 if cls.__name__ not in data_class_instances:
                     data_class_instances[cls.__name__] = []

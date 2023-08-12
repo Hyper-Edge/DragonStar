@@ -1,4 +1,5 @@
 import inflection
+import pydantic
 import sys
 import typing
 from ulid import ULID
@@ -64,6 +65,13 @@ def get_cs_type(fdef: type):
             assert False, f"{t_origin} not supported"
     else:
         return fdef.__name__
+
+
+TYPE_VAR = typing.TypeVar('TYPE_VAR')
+
+
+def optional_field(default_value, **kwargs):
+    return pydantic.Field(default=default_value, required=False, **kwargs)
 
 
 class Wrapped(object):

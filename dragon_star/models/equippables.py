@@ -1,5 +1,5 @@
-from dragon_star.dragon_star.sdk.models import DataModel, DataRef
-from dragon_star.dragon_star.models.data.equips.equippables.equippable import DragonEquippableData
+from dragon_star.sdk.models import DataModel, DataRef
+from dragon_star.models.data.equips.equippables.equippable import DragonEquippableData
 
 
 class DragonEquippable(DataModel):

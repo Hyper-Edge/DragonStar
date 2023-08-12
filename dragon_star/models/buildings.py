@@ -1,4 +1,4 @@
-from dragon_star.dragon_star.sdk.models import DataModel
+from dragon_star.sdk.models import DataModel
 
 
 class BuildingBase(DataModel):

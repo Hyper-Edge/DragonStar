@@ -43,28 +43,29 @@ class ProgressionLadder(_BaseModel):
     LevelField: str = 'Level'
     ExperienceField: str = 'Exp'
     LadderLevelData: typing.Type[BaseData]
-    _FullLadderLevelData: typing.Type[GenericLadderLevel] = None
-    _LadderClass: typing.Type[GenericLadder] = None
+
+    FullLadderLevelData: typing.Type[GenericLadderLevel] = optional_field(None)
+    LadderClass: typing.Type[GenericLadder] = optional_field(None)
 
     @property
     def ladder_class(self) -> typing.Type:
-        if self._LadderClass:
-            return self._LadderClass
+        if self.LadderClass:
+            return self.LadderClass
         cls_name = f'{self.Entity.__name__}{self.LevelField}{self.ExperienceField}Ladder'
         dyn_cls_args = dict(__base__=GenericLadder)
         dyn_cls_args['Levels'] = (typing.List[self.ladder_level_data_class], ...)
-        self._LadderClass = pydantic.create_model(cls_name, **dyn_cls_args)
-        return self._LadderClass
+        self.LadderClass = pydantic.create_model(cls_name, **dyn_cls_args)
+        return self.LadderClass
 
     @property
     def ladder_level_data_class(self) -> typing.Type:
-        if self._FullLadderLevelData:
-            return self._FullLadderLevelData
+        if self.FullLadderLevelData:
+            return self.FullLadderLevelData
         cls_name = f'{self.Entity.__name__}{self.LevelField}{self.ExperienceField}LadderData'
         dyn_cls_args = dict(__base__=GenericLadderLevel)
         dyn_cls_args['Data'] = (self.LadderLevelData, ...)
-        self._FullLadderLevelData = pydantic.create_model(cls_name, **dyn_cls_args)
-        return self._FullLadderLevelData
+        self.FullLadderLevelData = pydantic.create_model(cls_name, **dyn_cls_args)
+        return self.FullLadderLevelData
 
     def new_ladder(self, name: str):
         return self.ladder_class(

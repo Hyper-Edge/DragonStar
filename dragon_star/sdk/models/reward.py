@@ -1,26 +1,23 @@
+import pydantic
+
 from .types import *
 from .models import DataModelTemplate
 from .data import BaseData
 
 
-class Reward(object):
-    _assets: typing.List[typing.Tuple[DataModelTemplate, int]]
-    _items: typing.List[typing.Tuple[BaseData, int]]
+class Reward(pydantic.BaseModel):
+    assets: typing.List[typing.Tuple[DataModelTemplate, int]]
+    items: typing.List[typing.Tuple[BaseData, int]]
+    name: str
 
     def __init__(self, name: str = ''):
-        self._name = name
-        self._assets = []
-        self._items = []
-
-    @property
-    def items(self):
-        return iter(self._items)
+        super().__init__(name=name, assets=[], items=[])
 
     def add(self, item, amount: int = 1):
         if isinstance(item, BaseData):
-            self._items.append((item, amount))
+            self.items.append((item, amount))
         elif isinstance(item, DataModelTemplate):
-            self._assets.append((item, amount))
+            self.assets.append((item, amount))
         else:
             assert False
         return self
@@ -31,5 +28,5 @@ class Reward(object):
             Erc1155Rewards=[dict(
                 ItemId=item.id,
                 Amount=amount
-            ) for item, amount in self._items]
+            ) for item, amount in self.items]
         )

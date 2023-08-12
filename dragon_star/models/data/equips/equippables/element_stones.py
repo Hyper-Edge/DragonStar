@@ -1,16 +1,16 @@
-from dragon_star.dragon_star.sdk.models import BaseData, DataRef
-from dragon_star.dragon_star.sdk.models.crafting import CraftRule
+from dragon_star.sdk.models import BaseData, DataRef
+from dragon_star.sdk.models.crafting import CraftRule
 
-from dragon_star.dragon_star.models.data.slots.equip_slots.element_slots import *
-from dragon_star.dragon_star.models.data.equips.equippables.equippable import DragonEquippableData
-from dragon_star.dragon_star.models.data.element import ElementData
-from dragon_star.dragon_star.models.data.tier import *
+from dragon_star.models.data.slots.equip_slots.element_slots import *
+from dragon_star.models.data.equips.equippables.equippable import DragonEquippableData
+from dragon_star.models.data.element import ElementData
+from dragon_star.models.data.tier import *
 
 
 ################################################################################
 # Element stones for elemental dragons
 ################################################################################
-STONES_BY_ELEMENT = {el_data.Name:[] for el_data in ElementData.instances()}
+STONES_BY_ELEMENT = {el_data: dict() for el_data in ElementData.instances()}
 
 
 for el_data in ElementData.instances():
@@ -23,6 +23,7 @@ for el_data in ElementData.instances():
             Slot=DE_ELEMENT_STONE,
             Tier=tier_data)
         #
+        STONES_BY_ELEMENT[el_data][tier_data] = stone_data
         craft_rule = CraftRule(f'{stone_data}.Name crafting')
         craft_rule.require(stone_data, 3)
         craft_rule.produce(stone_data, 1)
@@ -36,5 +37,5 @@ DE_ELEMENT_STONE = DragonEquippableData.define(
 )
 DE_ELEMENT_STONE_CRAFT = CraftRule('')
 for el_data in ElementData.instances():
-    DE_ELEMENT_STONE_CRAFT.require(STONES_BY_ELEMENT[el_data.Name][TIER_SSR])
+    DE_ELEMENT_STONE_CRAFT.require(STONES_BY_ELEMENT[el_data][TIER_SSR])
 DE_ELEMENT_STONE_CRAFT.produce(DE_ELEMENT_STONE, 1)

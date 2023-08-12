@@ -1,6 +1,6 @@
-from dragon_star.dragon_star.models.data.affinity import *
-from dragon_star.dragon_star.models.data.tier import *
-from dragon_star.dragon_star.models.data.dragons.dragon import DragonData
+from dragon_star.models.data.affinity import *
+from dragon_star.models.data.tier import *
+from dragon_star.models.data.dragons.dragon import DragonData
 
 
 D_VRITRA = DragonData.define(
@@ -28,7 +28,7 @@ D_JORMUGANDR = DragonData.define(
 )
 
 D_OROCHI = DragonData.define(
-    Name='Jormugandr',
+    Name='Orochi',
     ShortDescription='',
     Description='',
     Clonable=True,

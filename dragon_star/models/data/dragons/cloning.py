@@ -1,7 +1,7 @@
-from dragon_star.dragon_star.models.data.slots.equip_slots.element_slots import *
-from dragon_star.dragon_star.models.data.equips.equippables.equippable import DragonEquippableData
-from dragon_star.dragon_star.models.data.dragons import DragonData
-from dragon_star.dragon_star.models.data.tier import *
+from dragon_star.models.data.slots.equip_slots.element_slots import *
+from dragon_star.models.data.equips.equippables.equippable import DragonEquippableData
+from dragon_star.models.data.dragons import DragonData
+from dragon_star.models.data.tier import *
 
 
 ################################################################################
