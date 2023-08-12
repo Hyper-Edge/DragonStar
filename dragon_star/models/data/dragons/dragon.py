@@ -15,6 +15,6 @@ class DragonData(BaseData):
     Affinity: typing.Optional[DataRef[AffinityData]]
     Element: typing.Optional[DataRef[ElementData]]
     Tier: DataRef[TierData]
-    EquipSlots: typing.List[DragonEquipSlotData] = list()
-    Clonable: typing.Optional[bool] = False
+    EquipSlots: typing.List[DataRef[DragonEquipSlotData]] = optional_field(list())
+    Clonable: bool = optional_field(False)
     RetirementReward: typing.Optional[Reward]

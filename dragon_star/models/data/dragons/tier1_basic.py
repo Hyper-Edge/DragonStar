@@ -8,6 +8,7 @@ for dragon_type in BASIC_DRAGONS:
         Name=dragon_type,
         ShortDescription='',
         Description='',
+        EquipSlots=[],
         Tier=TIER_C)
 
 BasicDragonCommonLadder = DragonLadder.new_ladder('BasicDragonCommonLadder')

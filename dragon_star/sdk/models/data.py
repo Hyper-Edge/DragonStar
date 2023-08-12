@@ -39,6 +39,21 @@ class BaseData(_BaseModel):
             yield inst
 
     @classmethod
+    def process_data_refs(cls, fname, ftype, fval):
+        t_origin = typing.get_origin(ftype)
+        if t_origin is DataRef:
+            t_args = typing.get_args(ftype)
+            if not isinstance(fval, t_args[0]):
+                raise Exception(
+                    f"Can't create instance of '{cls.__name__}': field '{fname}' should be of type {fdef.outer_type_}")
+            return DataRef[t_args[0]](ref=fval.id, dt=t_args[0])
+        elif t_origin is list:
+            t_args = typing.get_args(ftype)
+            return [cls.process_data_refs(fname, t_args[0], el) for el in fval]
+        else:
+            return fval
+
+    @classmethod
     def define(cls, **kwargs):
         if 'id' not in kwargs and 'Name' in kwargs:
             kwargs['id'] = to_underscore(kwargs['Name'])
@@ -49,13 +64,9 @@ class BaseData(_BaseModel):
                     continue
                 raise Exception(f"Can't create instance of '{cls.__name__}': field '{fname}' is undefined")
             #
-            t_origin = typing.get_origin(fdef.outer_type_)
-            if t_origin is DataRef:
-                t_args = typing.get_args(fdef.outer_type_)
-                arg = kwargs[fname]
-                if not isinstance(arg, t_args[0]):
-                    raise Exception(f"Can't create instance of '{cls.__name__}': field '{fname}' should be of type {fdef.outer_type_}")
-                kwargs[fname] = DataRef[t_args[0]](ref=arg.id, dt=t_args[0])
+            fval = kwargs[fname]
+            kwargs[fname] = cls.process_data_refs(fname, fdef.outer_type_, fval)
+        #
         inst = cls(**kwargs)
         if cls not in BaseData._registry:
             BaseData._registry[cls] = {}
@@ -86,13 +97,11 @@ class DataRef(typing.Generic[ReferencedType]):
 
     @classmethod
     def validate_ref(cls, v):
+        if isinstance(v, str):
+            return v
         if not isinstance(v, cls):
             raise ValidationError("Data reference should be DataRef")
-        try:
-            kls, id_ = v.ref_str.split('/')
-        except:
-            raise ValidationError(f"Invalid data reference: {v}")
-        return v
+        return v.ref_str
 
     def __repr__(self):
         return self.ref_str

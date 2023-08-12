@@ -12,7 +12,7 @@ D_WARRIOR_DRAKE = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Slots=[DE_TURRET_WEAPON]
+    EquipSlots=[DE_TURRET_WEAPON]
 )
 
 D_WARRIOR_VYWERN = DragonData.define(
@@ -21,7 +21,7 @@ D_WARRIOR_VYWERN = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Slots=[DE_AERIAL_WEAPON]
+    EquipSlots=[DE_AERIAL_WEAPON]
 )
 
 D_WARRIOR_DRAGON = DragonData.define(
@@ -30,7 +30,7 @@ D_WARRIOR_DRAGON = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Slots=[DE_AERIAL_WEAPON]
+    EquipSlots=[DE_AERIAL_WEAPON]
 )
 
 ################################################################################
@@ -42,7 +42,7 @@ D_WARRIOR_HEAVY_DRAKE = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Slots=[DE_TURRET_WEAPON, DE_TURRET_WEAPON]
+    EquipSlots=[DE_TURRET_WEAPON, DE_TURRET_WEAPON]
 )
 
 D_WARRIOR_HEAVY_VYWERN = DragonData.define(
@@ -51,7 +51,7 @@ D_WARRIOR_HEAVY_VYWERN = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Slots=[DE_AERIAL_WEAPON, DE_AERIAL_WEAPON]
+    EquipSlots=[DE_AERIAL_WEAPON, DE_AERIAL_WEAPON]
 )
 
 D_WARRIOR_HEAVY_DRAGON = DragonData.define(
@@ -60,5 +60,5 @@ D_WARRIOR_HEAVY_DRAGON = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Slots=[DE_AERIAL_WEAPON, DE_AERIAL_WEAPON]
+    EquipSlots=[DE_AERIAL_WEAPON, DE_AERIAL_WEAPON]
 )

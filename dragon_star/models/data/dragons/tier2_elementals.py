@@ -14,7 +14,7 @@ for el_data in ElementData.instances():
             ShortDescription='',
             Description='',
             Tier=TIER_U,
-            Slots=[DE_ELEMENT_STONE],
+            EquipSlots=[DE_ELEMENT_STONE],
             Affinity=AFFINITY_ELEMENTS)
 
 

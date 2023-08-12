@@ -10,7 +10,10 @@ from dragon_star.models.data.tier import *
 ################################################################################
 for dragon_data in DragonData.instances(predicate=lambda d: d.Clonable):
     clone = DragonData.define(
+        id=f'dragon_{dragon_data.id}_clone',
         Name=f'{dragon_data.Name} Clone',
+        ShortDescription='',
+        Description='',
         Affinity=dragon_data.Affinity,
         Tier=prev_tier(dragon_data.Tier)
     )

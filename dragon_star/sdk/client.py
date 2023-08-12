@@ -4,7 +4,8 @@ import requests
 import typing
 import ulid
 
-from .ws import HeWsClient
+from dragon_star.sdk.ws import HeWsClient
+from dragon_star.sdk.models.data import DataRef
 
 
 _EMPTY_ULID = ulid.ULID(bytes(16))
@@ -24,7 +25,7 @@ class DataClassDTO(pydantic.BaseModel):
 
 class DataClassInstanceFieldDTO(pydantic.BaseModel):
     Name: str
-    Value: str
+    Value: typing.Any
 
 
 class DataClassInstanceDTO(pydantic.BaseModel):
