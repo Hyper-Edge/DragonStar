@@ -19,4 +19,5 @@ CloneDragonHandler = Handler(
     ResponseClass=CloneDragonResp)
 
 CloneDragonHandler.Code = """
+return new CloneDragonResp { Success = true };
 """

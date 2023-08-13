@@ -19,7 +19,7 @@ ClaimQuestRewardHandler = Handler(
     ResponseClass=ClaimQuestRewardResp)
 
 ClaimQuestRewardHandler.Code = """
-var failResp = new ClaimQuestRewardResp { Success = false; };
+var failResp = new ClaimQuestRewardResp { Success = false };
 
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var quest = user.GetQuest(req.QuestId);
@@ -35,7 +35,7 @@ if (quest.RewardClaimed)
 }
 
 var questData = GameDb.GetQuestData(quest.Data);
-if (!RewardService.Give(user, questData.Reward))
+if (!GameContext.GiveReward(user, questData.Quest.Reward))
 {
     return failResp;
 }
@@ -43,5 +43,5 @@ if (!RewardService.Give(user, questData.Reward))
 quest.RewardClaimed = true;
 user.UpdateQuest(quest);
 
-return new ClaimQuestRewardResp { Success = true; };
+return new ClaimQuestRewardResp { Success = true };
 """

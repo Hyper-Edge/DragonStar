@@ -153,6 +153,7 @@ class RequestHandlerDTO(pydantic.BaseModel):
     ResponseClassId: typing.Optional[str]
     RequestClassName: str
     ResponseClassName: str
+    Code: str
 
 
 class AppDefDTO(pydantic.BaseModel):

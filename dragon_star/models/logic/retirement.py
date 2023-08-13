@@ -20,7 +20,7 @@ RetireDragonHandler.Code = """
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var dragon =  user.GetDragon(req.DragonId);
 
-var failResp = new RetireDragonResp { Success = false; }
+var failResp = new RetireDragonResp { Success = false };
 
 if (dragon is null)
 {
@@ -28,17 +28,17 @@ if (dragon is null)
 }
 
 var dragonData = GameDb.GetDragonData(dragon.Data);
-if (!GameContext.RemoveDragon(dragon))
+if (!user.RemoveDragon(dragon))
 {
     return failResp;
 }
 
-if (!RewardService.Give(user, dragonData.RetirementReward))
+if (!GameContext.GiveReward(user, dragonData.RetirementReward))
 {
     return failResp;
 }
 
-return new RetireDragonResp { Success = true; };
+return new RetireDragonResp { Success = true };
 """
 
 
@@ -57,25 +57,25 @@ RecycleDragonEquipmentHandler = Handler(
 
 RecycleDragonEquipmentHandler.Code = """
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
-var de =  user.GetDragonEquipment(req.DragonEquipmentId);
+var de =  user.GetDragonEquippable(req.DragonEquipmentId);
 
-var failResp = new RecycleDragonEquipmentResp { Success = false; }
+var failResp = new RecycleDragonEquipmentResp { Success = false };
 
 if (de is null)
 {
     return failResp;
 }
 
-var deData = GameDb.GetDragonEquipmentData(de.Data);
-if (!GameContext.RemoveDragonEquipment(de))
+var deData = GameDb.GetDragonEquippableData(de.Data);
+if (!user.RemoveDragonEquippable(de))
 {
     return failResp;
 }
 
-if (!RewardService.Give(user, deData.RecycleReward))
+if (!GameContext.GiveReward(user, deData.RecycleReward))
 {
     return failResp;
 }
 
-return new RecycleDragonEquipmentResp { Success = true; };
+return new RecycleDragonEquipmentResp { Success = true };
 """

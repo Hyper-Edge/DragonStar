@@ -31,6 +31,7 @@ def export():
     app_manifest = AppData.load()
     dl = DataLoader('dragon_star.models')
     j_app_data = dl.to_dict()
+    print(json.dumps(j_app_data, indent=4))
     app_def = AppDefDTO(Name=app_manifest.Name, **j_app_data)
     if app_manifest.Id:
         app_def.Id = app_manifest.Id

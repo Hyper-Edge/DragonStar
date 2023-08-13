@@ -6,7 +6,7 @@ from dragon_star.sdk.models.handler import Handler
 
 
 class CraftDragonEquipmentReq(_BaseModel):
-    CraftId: Ulid
+    CraftId: int
 
 
 class CraftDragonEquipmentResp(_BaseModel):
@@ -20,14 +20,12 @@ CraftDragonEquipmentHandler = Handler(
 
 
 CraftDragonEquipmentHandler.Code = """
+var failResp = new CraftDragonEquipmentResp { Success = false };
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
-
-var failResp = new CraftDragonEquipmentResp { Success = false; }
-
-if (!CraftService.CraftItems(GameContext, user, req.CraftId))
+var craftSuccess = await GameContext.CraftItems(user, (CraftSystem.Types)req.CraftId);
+if (!craftSuccess)
 {
     return failResp;
 }
-
-return new CraftDragonEquipmentResp { Success = true; };
+return new CraftDragonEquipmentResp { Success = true };
 """

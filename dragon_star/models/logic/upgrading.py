@@ -21,49 +21,42 @@ UpgradeDragonHandler = Handler(
     ResponseClass=UpgradeDragonResp)
 
 UpgradeDragonHandler.Code = """
+return new UpgradeDragonResp { Success = false };
+"""
+
+_UpgradeDragonHandler_FIXME = """
+var failResp = new UpgradeDragonResp { Success = false };
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var dragon =  user.GetDragon(req.DragonId);
 
-var itemsToUse = 
-
-if (!user.HasItems())
-{
-    return new UpgradeDragonResp { Success = false }; 
-} 
-
-for (int i = 0; i < req.MaterialIds.Count; i++)
-{{
-    if (!this.Users.HasItems(user, \"{item_type_s}\", matIds[i], amounts[i]))
-    {{
-        return false;
-    }}
-}}
-
-for (int i = 0; i < matIds.Count; i++)
-{{
-    var (success, itemsLeft) = this.Users.UseItems(user, \"{item_type_s}\", matIds[i], amounts[i]);
-    if (!success)
-    {{
-        return false;
-    }}
-}}
-
 ulong addExp = 0;
+var itemsToUse = new Dictionary<Ulid, ulong>();
 for (int i = 0; i < req.MaterialIds.Count; i++)
-{{
-    var matData = GameDb.GetDragonExpMaterial(req.MaterialIds[i]);
-    addExp += matData.Value * req.MaterialAmounts[i];
-}}
+{
+    var matData = GameDb.GetDragonExpMaterialData((DragonExpMaterialData.Types)req.MaterialIds[i]);
+    if ((matData is null) || !user.HasItems(matData.Uid, req.MaterialAmounts[i]))
+    {
+        return failResp;
+    }
+    itemsToUse.Add(matData.Uid, (ulong)req.MaterialAmounts[i]);
+    addExp += (ulong)matData.Value * req.MaterialAmounts[i];
+}
+
+if (!user.RemoveItems(itemsToUse))
+{
+    return failResp;
+}
 
 var dragonData = GameDb.GetDragonData(dragon.Data);
 var dragonLadderData = GameDb.GetDragonLadderData((int)dragonData.Ladder);
 
-dragon.Exp += addExp;
+dragon.Exp += (int)addExp;
 var (newLevel, newExp) = dragonLadderData.GetLevel(dragon.Level, dragon.Exp);
 dragon.Level = newLevel;
 dragon.Exp = newExp;
+user.UpdateDragon(dragon);
 
-return new UpgradeDragonResp { Success = true; };
+return new UpgradeDragonResp { Success = true };
 """
 
 
@@ -83,6 +76,7 @@ UpgradeDragonEquipmentHandler = Handler(
     ResponseClass=UpgradeDragonEquipmentResp)
 
 UpgradeDragonEquipmentHandler.Code = """
+return new UpgradeDragonEquipmentResp { Success = true };
 """
 
 
@@ -102,17 +96,23 @@ UpgradeBuildingHandler = Handler(
     ResponseClass=UpgradeBuildingResp)
 
 UpgradeBuildingHandler.Code = """
+return new UpgradeBuildingResp { Success = true };
+"""
+
+#FIXME
+_FIXME_IMPL = """
+var failResp = new UpgradeBuildingResp { Success = false };
+
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var building =  user.GetBuilding(req.BuildingId);
 var buildingData = GameDb.GetBuildingData(building.Data);
 var buildingLevelLadderData = GameDb.GetBuildingLevelLadderData(buildingData.Ladder);
 
-var failResp = new UpgradeBuildingResp { Success = false; };
 //???
 if (!UpgradeService.DoUpgrade(building))
 {
     return failResp;
 }
 
-return new UpgradeBuildingResp { Success = true; };
+return new UpgradeBuildingResp { Success = true };
 """

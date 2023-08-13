@@ -1,19 +1,19 @@
 import typing
 
 from .base import _BaseModel
-from .data import BaseData
+from .types import optional_field
 
 
 class Handler(_BaseModel):
     Name: str
-    RequestClass: typing.Type[BaseData]
-    ResponseClass: typing.Type[BaseData]
-    Code: typing.Optional[str]
+    RequestClass: typing.Type[_BaseModel]
+    ResponseClass: typing.Type[_BaseModel]
+    Code: str = optional_field('')
 
     def to_dict(self):
         return dict(
             Name=self.Name,
-            RequestClass=self.RequestClass.__name__,
-            ResponseClass=self.ResponseClass.__name__,
+            RequestClassName=self.RequestClass.__name__,
+            ResponseClassName=self.ResponseClass.__name__,
             Code=self.Code
         )

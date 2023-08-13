@@ -22,19 +22,24 @@ EquipDragonHandler = Handler(
 
 
 EquipDragonHandler.Code = """
+return new EquipDragonResp { Success = false };
+"""
+
+#FIXME
+_FIXME_EquipDragonHandler = """
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var dragon =  user.GetDragon(req.DragonId);
 
-var dragonEquipment = user.GetDragonEquipment(req.EquipmentId);
-var dragonEquipmentData = user.GetDragonEquipmentData(req.EquipmentId);
+var dragonEquipment = user.GetDragonEquippable(req.EquipmentId);
+var dragonEquipmentData = GameDb.GetDragonEquippableData(dragonEquipment.Data);
 
 var dragonData = GameDb.GetDragonData(dragon.Data);
 
-var failResp = new EquipDragonResp { Success = false; }
+var failResp = new EquipDragonResp { Success = false };
 
 var slot = dragon.GetEquipmentSlot(req.SlotId);
-var slotData = GameDb.GetDragonEquipmentSlotData(slot.Data);
-if (slotData != dragonEquipmentData.Slot)
+var slotData = GameDb.GetDragonEquipSlotData(slot.Data);
+if (slotData.Id != (int)dragonEquipmentData.Slot)
 {
     return failResp;
 }
@@ -42,5 +47,5 @@ if (slotData != dragonEquipmentData.Slot)
 slot.EquipmentId = dragonEquipment.Id;
 user.UpdateDragon(dragon);
 
-return new EquipDragonResp { Success = true; };
+return new EquipDragonResp { Success = true };
 """

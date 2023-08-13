@@ -19,7 +19,7 @@ ClaimAchievementRewardHandler = Handler(
     ResponseClass=ClaimAchievementRewardResp)
 
 ClaimAchievementRewardHandler.Code = """
-var failResp = new ClaimAchievementRewardResp { Success = false; };
+var failResp = new ClaimAchievementRewardResp { Success = false };
 
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var achievement = user.GetAchievement(req.AchievementId);
@@ -30,7 +30,7 @@ if (achievement.Claimed)
 
 var achievementData = GameDb.GetAchievementData(achievement.Data);
 
-if (!RewardService.Give(user, achievementData.Reward))
+if (!GameContext.GiveReward(user, achievementData.Reward))
 {
     return failResp;
 }
@@ -38,5 +38,5 @@ if (!RewardService.Give(user, achievementData.Reward))
 achievement.Claimed = true;
 user.UpdateAchievement(achievement);
 
-return new ClaimAchievementRewardResp { Success = true; };
+return new ClaimAchievementRewardResp { Success = true };
 """

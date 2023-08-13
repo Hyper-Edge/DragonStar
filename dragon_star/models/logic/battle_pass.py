@@ -28,17 +28,17 @@ ClaimBattlePassRewardsHandler = Handler(
     ResponseClass=ClaimBattlePassRewardsResp)
 
 ClaimBattlePassRewardsHandler.Code = """
-var failResp = new ClaimBattlePassRewardsResp { Success = false; };
+var failResp = new ClaimBattlePassRewardsResp { Success = false };
 
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var bp = user.GetBattlePass(req.BpId);
 
-if (!bp.ClaimLevelReward(GameContext, user, req.Level))
+if (!GameContext.ClaimBattlePassReward(bp, user, req.Level))
 {
     return failResp;
 }
 
-return new ClaimBattlePassRewardsResp { Success = true; };
+return new ClaimBattlePassRewardsResp { Success = true };
 """
 
 
@@ -53,10 +53,10 @@ var bp = user.GetBattlePass(req.BpId);
 
 var failResp = new ClaimBattlePassAllRewardsResp { Success = false };
 
-if (!bp.ClaimAllRewards(GameContext, user))
+if (!GameContext.ClaimAllBattlePassRewards(bp, user))
 {
     return failResp;
 }
 
-return ClaimBattlePassAllRewardsResp { Success = true };
+return new ClaimBattlePassAllRewardsResp { Success = true };
 """
