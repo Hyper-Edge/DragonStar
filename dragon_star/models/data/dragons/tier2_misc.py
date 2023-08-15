@@ -1,6 +1,7 @@
 from dragon_star.models.data.affinity import *
 from dragon_star.models.data.tier import *
 from dragon_star.models.data.dragons.dragon import DragonData
+from dragon_star.models.data.ladders.dragons.tier1 import BasicDragonCommonLadder
 
 
 ################################################################################
@@ -12,7 +13,8 @@ D_BUBBLE_DRAGON = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Affinity=AFFINITY_ELEMENTS)
+    Affinity=AFFINITY_ELEMENTS,
+    Ladder=BasicDragonCommonLadder)
 
 D_SKULL_DRAGON = DragonData.define(
     id='dragon_skull',
@@ -20,7 +22,8 @@ D_SKULL_DRAGON = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Affinity=AFFINITY_PSYCHO)
+    Affinity=AFFINITY_PSYCHO,
+    Ladder=BasicDragonCommonLadder)
 
 D_FUTURE_DRAGON = DragonData.define(
     id='dragon_future',
@@ -28,4 +31,5 @@ D_FUTURE_DRAGON = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Affinity=AFFINITY_TECHNO)
+    Affinity=AFFINITY_TECHNO,
+    Ladder=BasicDragonCommonLadder)

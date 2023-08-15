@@ -1,6 +1,7 @@
 from dragon_star.models.data.dragons import *
 from dragon_star.models.data.tier import *
 from dragon_star.models.data.slots.equip_slots.weapon_slots import *
+from dragon_star.models.data.ladders.dragons.tier1 import BasicDragonCommonLadder
 
 
 ################################################################################
@@ -12,7 +13,8 @@ D_WARRIOR_DRAKE = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    EquipSlots=[DE_TURRET_WEAPON]
+    EquipSlots=[DE_TURRET_WEAPON],
+    Ladder=BasicDragonCommonLadder
 )
 
 D_WARRIOR_VYWERN = DragonData.define(
@@ -21,7 +23,8 @@ D_WARRIOR_VYWERN = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    EquipSlots=[DE_AERIAL_WEAPON]
+    EquipSlots=[DE_AERIAL_WEAPON],
+    Ladder=BasicDragonCommonLadder
 )
 
 D_WARRIOR_DRAGON = DragonData.define(
@@ -30,7 +33,8 @@ D_WARRIOR_DRAGON = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    EquipSlots=[DE_AERIAL_WEAPON]
+    EquipSlots=[DE_AERIAL_WEAPON],
+    Ladder=BasicDragonCommonLadder
 )
 
 ################################################################################
@@ -42,7 +46,8 @@ D_WARRIOR_HEAVY_DRAKE = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    EquipSlots=[DE_TURRET_WEAPON, DE_TURRET_WEAPON]
+    EquipSlots=[DE_TURRET_WEAPON, DE_TURRET_WEAPON],
+    Ladder=BasicDragonCommonLadder
 )
 
 D_WARRIOR_HEAVY_VYWERN = DragonData.define(
@@ -51,7 +56,8 @@ D_WARRIOR_HEAVY_VYWERN = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    EquipSlots=[DE_AERIAL_WEAPON, DE_AERIAL_WEAPON]
+    EquipSlots=[DE_AERIAL_WEAPON, DE_AERIAL_WEAPON],
+    Ladder=BasicDragonCommonLadder
 )
 
 D_WARRIOR_HEAVY_DRAGON = DragonData.define(
@@ -60,5 +66,6 @@ D_WARRIOR_HEAVY_DRAGON = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    EquipSlots=[DE_AERIAL_WEAPON, DE_AERIAL_WEAPON]
+    EquipSlots=[DE_AERIAL_WEAPON, DE_AERIAL_WEAPON],
+    Ladder=BasicDragonCommonLadder
 )

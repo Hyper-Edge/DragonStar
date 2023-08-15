@@ -1,6 +1,8 @@
 from dragon_star.models.data.dragons.dragon import *
 from dragon_star.models.dragons import *
+from dragon_star.models.data.ladders.dragons.tier1 import BasicDragonCommonLadder
 from dragon_star.sdk.utils import to_underscore
+
 
 for dragon_type in BASIC_DRAGONS:
     DragonData.define(
@@ -9,15 +11,5 @@ for dragon_type in BASIC_DRAGONS:
         ShortDescription='',
         Description='',
         EquipSlots=[],
-        Tier=TIER_C)
-
-BasicDragonCommonLadder = DragonLadder.new_ladder('BasicDragonCommonLadder')
-#assert False, str(BasicDragonCommonLadder)
-exp = 100
-step = 100
-for lvl in range(1, 40):
-    #FIXME
-    level_data = DragonLadder.ladder_level_data_class(id=f'xx{lvl}', Exp=exp, Data=DragonLadderLevelData(id=f'xx{lvl}'))
-    BasicDragonCommonLadder.add_level(level_data)
-    exp += step
-    step += 100
+        Tier=TIER_C,
+        Ladder=BasicDragonCommonLadder)

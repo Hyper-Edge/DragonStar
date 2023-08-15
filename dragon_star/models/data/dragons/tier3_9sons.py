@@ -1,6 +1,7 @@
 from dragon_star.models.data.affinity import *
 from dragon_star.models.data.tier import *
 from dragon_star.models.data.dragons.dragon import DragonData
+from dragon_star.models.data.ladders.dragons.tier1 import BasicDragonCommonLadder
 
 
 ################################################################################
@@ -25,7 +26,8 @@ D_QIUNIU = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_R
+    Tier=TIER_R,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_YAZI = DragonData.define(
@@ -33,7 +35,8 @@ D_YAZI = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_R
+    Tier=TIER_R,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_CHAOFENG = DragonData.define(
@@ -41,7 +44,8 @@ D_CHAOFENG = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_R
+    Tier=TIER_R,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_PULAO = DragonData.define(
@@ -49,7 +53,8 @@ D_PULAO = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_R
+    Tier=TIER_R,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_SUANNI = DragonData.define(
@@ -57,7 +62,8 @@ D_SUANNI = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_R
+    Tier=TIER_R,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_BIXI = DragonData.define(
@@ -65,7 +71,8 @@ D_BIXI = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_R
+    Tier=TIER_R,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_BIAN = DragonData.define(
@@ -73,7 +80,8 @@ D_BIAN = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_R
+    Tier=TIER_R,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_BAXIA = DragonData.define(
@@ -81,7 +89,8 @@ D_BAXIA = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_R
+    Tier=TIER_R,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_CHIWEN = DragonData.define(
@@ -89,5 +98,6 @@ D_CHIWEN = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_R
+    Tier=TIER_R,
+    Ladder=BasicDragonCommonLadder
 )

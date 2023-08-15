@@ -1,5 +1,3 @@
-import inflection
-import pydantic
 import typing
 
 from .base import _BaseModel

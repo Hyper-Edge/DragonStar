@@ -1,6 +1,7 @@
 from dragon_star.models.data.affinity import *
 from dragon_star.models.data.tier import *
 from dragon_star.models.data.dragons.dragon import DragonData
+from dragon_star.models.data.ladders.dragons.tier1 import BasicDragonCommonLadder
 
 
 D_QINGLONG = DragonData.define(
@@ -8,7 +9,8 @@ D_QINGLONG = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_HUANGLONG = DragonData.define(
@@ -16,7 +18,8 @@ D_HUANGLONG = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_BAILONG = DragonData.define(
@@ -24,7 +27,8 @@ D_BAILONG = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_CHILONG = DragonData.define(
@@ -32,7 +36,8 @@ D_CHILONG = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_HEILONG = DragonData.define(
@@ -40,5 +45,6 @@ D_HEILONG = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )

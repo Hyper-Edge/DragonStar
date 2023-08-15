@@ -1,12 +1,18 @@
 from .cost import Cost
 from .reward import Reward
 
+from dragon_star.sdk.utils import to_underscore
+
 
 class CraftRule(object):
     def __init__(self, name: str):
         self._name = name
         self._reward = Reward()
         self._cost = Cost()
+
+    @property
+    def id(self):
+        return to_underscore(self._name)
 
     @property
     def name(self) -> str:

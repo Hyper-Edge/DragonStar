@@ -1,6 +1,7 @@
 from dragon_star.models.data.dragons.dragon import *
 from dragon_star.models.data.slots.equip_slots.element_slots import *
 from dragon_star.sdk.utils import to_underscore
+from .tier1_basic import BasicDragonCommonLadder
 
 
 ################################################################################
@@ -15,7 +16,8 @@ for el_data in ElementData.instances():
             Description='',
             Tier=TIER_U,
             EquipSlots=[DE_ELEMENT_STONE],
-            Affinity=AFFINITY_ELEMENTS)
+            Affinity=AFFINITY_ELEMENTS,
+            Ladder=BasicDragonCommonLadder)
 
 
 D_SKYHIGH_DRAGON = DragonData.define(
@@ -24,4 +26,5 @@ D_SKYHIGH_DRAGON = DragonData.define(
     ShortDescription='',
     Description='',
     Tier=TIER_U,
-    Affinity=AFFINITY_ELEMENTS)
+    Affinity=AFFINITY_ELEMENTS,
+    Ladder=BasicDragonCommonLadder)

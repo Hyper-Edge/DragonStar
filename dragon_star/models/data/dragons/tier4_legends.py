@@ -1,6 +1,7 @@
 from dragon_star.models.data.affinity import *
 from dragon_star.models.data.tier import *
 from dragon_star.models.data.dragons.dragon import DragonData
+from dragon_star.models.data.ladders.dragons.tier1 import BasicDragonCommonLadder
 
 
 D_VRITRA = DragonData.define(
@@ -8,7 +9,8 @@ D_VRITRA = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_FAFNIR = DragonData.define(
@@ -16,7 +18,8 @@ D_FAFNIR = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_JORMUGANDR = DragonData.define(
@@ -24,7 +27,8 @@ D_JORMUGANDR = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_OROCHI = DragonData.define(
@@ -32,7 +36,8 @@ D_OROCHI = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_QUETZALCOATL = DragonData.define(
@@ -40,7 +45,8 @@ D_QUETZALCOATL = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )
 
 D_TIAMAT = DragonData.define(
@@ -48,5 +54,6 @@ D_TIAMAT = DragonData.define(
     ShortDescription='',
     Description='',
     Clonable=True,
-    Tier=TIER_SR
+    Tier=TIER_SR,
+    Ladder=BasicDragonCommonLadder
 )

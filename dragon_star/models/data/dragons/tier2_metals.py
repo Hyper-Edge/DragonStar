@@ -2,6 +2,7 @@ from dragon_star.models.data.affinity import *
 from dragon_star.models.data.tier import *
 from dragon_star.models.data.dragons.dragon import DragonData
 from dragon_star.models.data.metals import MetalData
+from dragon_star.models.data.ladders.dragons.tier1 import BasicDragonCommonLadder
 
 
 ################################################################################
@@ -15,7 +16,8 @@ for metal_data in MetalData.iter_instances(predicate=lambda m: m.HasMetallicDrag
         ShortDescription='',
         Description='',
         Tier=TIER_U,
-        Affinity=AFFINITY_ELEMENTS)
+        Affinity=AFFINITY_ELEMENTS,
+        Ladder=BasicDragonCommonLadder)
     #
     DragonData.define(
         id=f'dragon_metallic_{metal_data.id}_drake',
@@ -23,4 +25,5 @@ for metal_data in MetalData.iter_instances(predicate=lambda m: m.HasMetallicDrag
         ShortDescription='',
         Description='',
         Tier=TIER_U,
-        Affinity=AFFINITY_ELEMENTS)
+        Affinity=AFFINITY_ELEMENTS,
+        Ladder=BasicDragonCommonLadder)

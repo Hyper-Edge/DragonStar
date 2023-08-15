@@ -21,10 +21,6 @@ UpgradeDragonHandler = Handler(
     ResponseClass=UpgradeDragonResp)
 
 UpgradeDragonHandler.Code = """
-return new UpgradeDragonResp { Success = false };
-"""
-
-_UpgradeDragonHandler_FIXME = """
 var failResp = new UpgradeDragonResp { Success = false };
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var dragon =  user.GetDragon(req.DragonId);
@@ -48,12 +44,11 @@ if (!user.RemoveItems(itemsToUse))
 }
 
 var dragonData = GameDb.GetDragonData(dragon.Data);
-var dragonLadderData = GameDb.GetDragonLadderData((int)dragonData.Ladder);
+var ladderData = GameDb.GetExpLadderData(dragonData.Ladder);
 
-dragon.Exp += (int)addExp;
-var (newLevel, newExp) = dragonLadderData.GetLevel(dragon.Level, dragon.Exp);
-dragon.Level = newLevel;
-dragon.Exp = newExp;
+var (newLevel, newExp) = ladderData.ExpLadder.GetLevel((uint)dragon.Level, (ulong)(dragon.Exp + (int)addExp));
+dragon.Level = (int)newLevel;
+dragon.Exp = (int)newExp;
 user.UpdateDragon(dragon);
 
 return new UpgradeDragonResp { Success = true };

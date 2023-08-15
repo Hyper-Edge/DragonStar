@@ -33,9 +33,9 @@ class DataLoader(object):
         self._struct_classes = []
         self._storage_classes = []
         self._rewards: typing.List[Reward] = []
-        self._crafts: typing.List[CraftRule] = []
-        self._progressions: typing.List[ProgressionLadder] = []
-        self._ladders: typing.List[GenericLadder] = []
+        self._crafts: typing.Dict[str, CraftRule] = {}
+        self._progressions: typing.Dict[str, ProgressionLadder] = {}
+        self._ladders: typing.Dict[str, GenericLadder] = {}
         self._battle_passes: typing.List[BattlePass] = []
         self._quests: typing.List[Quest] = []
         self._energy_systems: typing.List[EnergySystem] = []
@@ -66,11 +66,11 @@ class DataLoader(object):
             elif isinstance(obj, Reward):
                 self._rewards.append(obj)
             elif isinstance(obj, CraftRule):
-                self._crafts.append(obj)
+                self._crafts[obj.id] = obj
             elif isinstance(obj, ProgressionLadder):
-                self._progressions.append(obj)
+                self._progressions[obj.id] = obj
             elif isinstance(obj, GenericLadder):
-                self._ladders.append(obj)
+                self._ladders[obj.id] = obj
             elif isinstance(obj, BattlePass):
                 self._battle_passes.append(obj)
             elif isinstance(obj, Quest):
@@ -101,6 +101,8 @@ class DataLoader(object):
         data_class_instances = {}
         #
         for cls in BaseData.dataclasses():
+            if issubclass(cls, GenericLadder):
+                continue
             for data_inst in cls.instances():
                 j = datainst_to_json(cls, data_inst)
                 if cls.__name__ not in data_class_instances:
@@ -117,9 +119,9 @@ class DataLoader(object):
             Quests=[q.to_dict() for q in self._quests],
             Tournaments=[t.to_dict() for t in self._tournaments],
             BattlePasses=[bp.to_dict() for bp in self._battle_passes],
-            Progressions=[p.to_dict() for p in self._progressions],
-            ProgressionLadders=[l.to_dict() for l in self._ladders],
-            CraftRules=[c.to_dict() for c in self._crafts],
+            Progressions=[p.to_dict() for p in self._progressions.values()],
+            ProgressionLadders=[l.to_dict() for l in self._ladders.values()],
+            CraftRules=[c.to_dict() for c in self._crafts.values()],
             Rewards=[r.to_dict() for r in self._rewards],
             EnergySystems=[es.dict() for es in self._energy_systems],
             RequestHandlers=[h.to_dict() for h in self._request_handlers]
