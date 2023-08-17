@@ -7,7 +7,7 @@ from dragon_star.sdk.models.handler import Handler
 
 class EquipDragonReq(_BaseModel):
     DragonId: Ulid
-    SlotId: Ulid
+    SlotIdx: int
     EquipmentId: Ulid
 
 
@@ -22,29 +22,30 @@ EquipDragonHandler = Handler(
 
 
 EquipDragonHandler.Code = """
-return new EquipDragonResp { Success = false };
-"""
-
-#FIXME
-_FIXME_EquipDragonHandler = """
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var dragon =  user.GetDragon(req.DragonId);
+var dragonData = GameDb.GetDragonData(dragon.Data);
+if (dragon.EquipSlots.Count == 0)
+{
+    for (int i = 0; i < dragonData.EquipSlots.Count; i++)
+    {
+        dragon.EquipSlots.Add(Ulid.Empty);
+    }
+}
 
 var dragonEquipment = user.GetDragonEquippable(req.EquipmentId);
 var dragonEquipmentData = GameDb.GetDragonEquippableData(dragonEquipment.Data);
 
-var dragonData = GameDb.GetDragonData(dragon.Data);
-
 var failResp = new EquipDragonResp { Success = false };
 
-var slot = dragon.GetEquipmentSlot(req.SlotId);
-var slotData = GameDb.GetDragonEquipSlotData(slot.Data);
+var slotDataId = dragonData.EquipSlots[req.SlotIdx];
+var slotData = GameDb.GetDragonEquipSlotData(slotDataId);
 if (slotData.Id != (int)dragonEquipmentData.Slot)
 {
     return failResp;
 }
 
-slot.EquipmentId = dragonEquipment.Id;
+dragon.EquipSlots[req.SlotIdx] = dragonEquipment.Id;
 user.UpdateDragon(dragon);
 
 return new EquipDragonResp { Success = true };
