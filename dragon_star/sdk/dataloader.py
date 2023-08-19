@@ -55,6 +55,7 @@ class DataLoader(object):
                     continue
                 if obj is _BaseModel:
                     continue
+                #
                 if issubclass(obj, StorageBase):
                     self._storage_classes.append((obj.get_storage_type(), obj))
                 elif issubclass(obj, DataModel):

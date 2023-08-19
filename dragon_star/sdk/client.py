@@ -20,6 +20,7 @@ class DataClassFieldDTO(pydantic.BaseModel):
 class DataClassDTO(pydantic.BaseModel):
     Id: str = str(_EMPTY_ULID)
     Name: str
+    Base: typing.Optional[str]
     Fields: typing.List[DataClassFieldDTO]
 
 

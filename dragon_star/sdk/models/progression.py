@@ -51,7 +51,8 @@ class GenericLadder(BaseData):
 
 class ProgressionLadder(BaseData):
     def __init__(self, **kwargs):
-        id_ = to_underscore(type(self).__name__)
+        entity_name = inflection.camelize(kwargs.get('Entity').__name__)
+        id_ = f"progression_{entity_name}_{kwargs.get('LevelField', 'Level')}"
         super().__init__(id=id_, **kwargs)
 
     Entity: typing.Type[DataModel]
@@ -89,7 +90,7 @@ class ProgressionLadder(BaseData):
 
     def new_ladder(self, name: str):
         return self.ladder_class.define(
-            id=to_underscore(name),
+            id=f'{self.id}_{inflection.underscore(name)}',
             Name=name,
             ProgressionName=f"Progression{self.EntityName}{self.LevelField}",
             FullLadderLevelData=self.ladder_level_data_class,

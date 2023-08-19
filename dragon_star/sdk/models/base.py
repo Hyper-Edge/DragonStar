@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 import six
 
-from .types import get_cs_type
+from .types import get_cs_type, Ulid
 
 
 class _BaseModelMeta(type(BaseModel)):
@@ -51,3 +51,7 @@ class _BaseModel(six.with_metaclass(_BaseModelMeta, BaseModel)):
             Name=cls.__name__,
             Fields=flds
         )
+
+
+class StructModel(_BaseModel):
+    Id: Ulid
