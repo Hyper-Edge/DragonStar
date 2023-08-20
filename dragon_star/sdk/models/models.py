@@ -44,20 +44,9 @@ class DataModel(_BaseModel, metaclass=DataModelMeta):
     @classmethod
     def to_dict(cls):
         d = super().to_dict()
-        base = cls.base()
+        base = cls.base(DataModel)
         d['Base'] = base.__name__ if base else None
         return d
-
-    @classmethod
-    def base(cls):
-        found_data_model = False
-        for p_cls in reversed(cls.__mro__):
-            if p_cls is DataModel:
-                found_data_model = True
-            #
-            elif found_data_model and issubclass(p_cls, DataModel) and cls != p_cls:
-                return p_cls
-        return None
 
     @classmethod
     def dataclass(cls):

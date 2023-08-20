@@ -13,14 +13,12 @@ class GenericLadderLevel(BaseData):
         super().__init__(id=id_, **kwargs)
 
     Level: int = optional_field(0)
-    Exp: int = 0
     Reward: typing.Optional[Reward] = None
     Cost: typing.Optional[Cost] = None
     Conditions: typing.List[str] = optional_field(list())
 
     def to_dict(self):
         return dict(
-            Exp=self.Exp,
             Reward=self.Reward.to_dict() if self.Reward else None,
             Cost=self.Cost.to_dict() if self.Cost else None,
             Conditions=self.Conditions,
@@ -28,12 +26,20 @@ class GenericLadderLevel(BaseData):
         )
 
 
-class GenericLadder(BaseData):
+class GenericExpLadderLevel(GenericLadderLevel):
+    Exp: int = 0
+
+    def to_dict(self):
+        d = super().to_dict()
+        d['Exp'] = self.Exp
+        return d
+
+
+class GenericLadderBase(BaseData):
     Name: str
     ProgressionId: typing.Optional[str]
     ProgressionName: str
     Levels: typing.List[GenericLadderLevel]
-    FullLadderLevelData: typing.Type[GenericLadderLevel] = optional_field(None)
 
     def add_level(self, **kwargs):
         curr_lvl = len(self.Levels)
@@ -49,10 +55,19 @@ class GenericLadder(BaseData):
         )
 
 
+class GenericLadder(GenericLadderBase):
+    FullLadderLevelData: typing.Type[GenericLadderLevel] = optional_field(None)
+
+
+class GenericExpLadder(GenericLadderBase):
+    FullLadderLevelData: typing.Type[GenericExpLadderLevel] = optional_field(None)
+
+
 class ProgressionLadder(BaseData):
     def __init__(self, **kwargs):
         entity_name = inflection.camelize(kwargs.get('Entity').__name__)
-        id_ = f"progression_{entity_name}_{kwargs.get('LevelField', 'Level')}"
+        lvl_field = kwargs.get('LevelField', 'Level')
+        id_ = f"progression_{inflection.underscore(entity_name)}_{inflection.underscore(lvl_field)}"
         super().__init__(id=id_, **kwargs)
 
     Entity: typing.Type[DataModel]
@@ -73,7 +88,7 @@ class ProgressionLadder(BaseData):
         if self.LadderClass:
             return self.LadderClass
         cls_name = f'{self.EntityName}{self.LevelField}{self.ExperienceField}Ladder'
-        dyn_cls_args = dict(__base__=GenericLadder)
+        dyn_cls_args = dict(__base__=(GenericExpLadder if self.IsExperienceBased else GenericLadder))
         dyn_cls_args['Levels'] = (typing.List[self.ladder_level_data_class], ...)
         self.LadderClass = pydantic.create_model(cls_name, **dyn_cls_args)
         return self.LadderClass
@@ -83,7 +98,7 @@ class ProgressionLadder(BaseData):
         if self.FullLadderLevelData:
             return self.FullLadderLevelData
         cls_name = f'{self.EntityName}{self.LevelField}{self.ExperienceField}LadderData'
-        dyn_cls_args = dict(__base__=GenericLadderLevel)
+        dyn_cls_args = dict(__base__=(GenericExpLadderLevel if self.IsExperienceBased else GenericLadderLevel))
         dyn_cls_args['Data'] = (self.LadderLevelData, ...)
         self.FullLadderLevelData = pydantic.create_model(cls_name, **dyn_cls_args)
         return self.FullLadderLevelData

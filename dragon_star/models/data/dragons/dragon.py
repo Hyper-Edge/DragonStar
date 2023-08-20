@@ -3,7 +3,7 @@ from dragon_star.models.data.tier import *
 from dragon_star.models.data.element import *
 from dragon_star.models.data.slots.equip_slots import DragonEquipSlotData
 from dragon_star.sdk.models.reward import Reward
-from dragon_star.sdk.models.progression import GenericLadder
+from dragon_star.sdk.models.progression import GenericExpLadder
 
 
 BASIC_DRAGONS = ('Drake', 'Dragon', 'Wyvern', 'Wyrm', 'Lindwurm')
@@ -19,4 +19,4 @@ class DragonData(BaseData):
     EquipSlots: typing.List[DataRef[DragonEquipSlotData]] = optional_field(list())
     Clonable: bool = optional_field(False)
     RetirementReward: typing.Optional[Reward]
-    Ladder: DataRef[GenericLadder]
+    Ladder: DataRef[GenericExpLadder]

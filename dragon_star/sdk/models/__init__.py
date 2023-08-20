@@ -6,7 +6,7 @@ from .inventory import Inventory
 from .reward import Reward
 from .cost import Cost
 from .battle_pass import BattlePass
-from .progression import ProgressionLadder, GenericLadder
+from .progression import ProgressionLadder, GenericLadderBase, GenericLadder, GenericExpLadder
 from .quest import Quest
 from .energy_system import EnergySystem
 from .crafting import CraftRule

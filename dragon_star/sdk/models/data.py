@@ -77,6 +77,13 @@ class BaseData(_BaseModel):
         BaseData._lists[cls].append(inst)
         return inst
 
+    @classmethod
+    def to_dict(cls):
+        d = super().to_dict()
+        base = cls.base(BaseData)
+        d['Base'] = base.__name__ if base else None
+        return d
+
 
 ReferencedType = typing.TypeVar('ReferencedType')
 

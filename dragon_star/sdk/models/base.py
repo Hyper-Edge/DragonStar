@@ -41,6 +41,17 @@ class _BaseModel(six.with_metaclass(_BaseModelMeta, BaseModel)):
         return cls._nft
 
     @classmethod
+    def base(cls, b_cls):
+        found_data_model = False
+        for p_cls in reversed(cls.__mro__):
+            if p_cls is b_cls:
+                found_data_model = True
+            #
+            elif found_data_model and issubclass(p_cls, b_cls) and cls != p_cls:
+                return p_cls
+        return None
+
+    @classmethod
     def to_dict(cls):
         flds = []
         for fname, fdef in cls.__fields__.items():

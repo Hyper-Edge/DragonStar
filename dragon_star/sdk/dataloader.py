@@ -35,7 +35,7 @@ class DataLoader(object):
         self._rewards: typing.List[Reward] = []
         self._crafts: typing.Dict[str, CraftRule] = {}
         self._progressions: typing.Dict[str, ProgressionLadder] = {}
-        self._ladders: typing.Dict[str, GenericLadder] = {}
+        self._ladders: typing.Dict[str, GenericLadderBase] = {}
         self._battle_passes: typing.List[BattlePass] = []
         self._quests: typing.List[Quest] = []
         self._energy_systems: typing.List[EnergySystem] = []
@@ -70,7 +70,7 @@ class DataLoader(object):
                 self._crafts[obj.id] = obj
             elif isinstance(obj, ProgressionLadder):
                 self._progressions[obj.id] = obj
-            elif isinstance(obj, GenericLadder):
+            elif isinstance(obj, GenericLadderBase):
                 self._ladders[obj.id] = obj
             elif isinstance(obj, BattlePass):
                 self._battle_passes.append(obj)
@@ -102,7 +102,7 @@ class DataLoader(object):
         data_class_instances = {}
         #
         for cls in BaseData.dataclasses():
-            if issubclass(cls, GenericLadder):
+            if issubclass(cls, GenericLadderBase):
                 continue
             for data_inst in cls.instances():
                 j = datainst_to_json(cls, data_inst)
