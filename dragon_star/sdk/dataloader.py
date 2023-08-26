@@ -32,6 +32,7 @@ class DataLoader(object):
         self._model_classes = []
         self._struct_classes = []
         self._storage_classes = []
+        self._event_classes = []
         self._rewards: typing.List[Reward] = []
         self._crafts: typing.Dict[str, CraftRule] = {}
         self._progressions: typing.Dict[str, ProgressionLadder] = {}
@@ -62,6 +63,8 @@ class DataLoader(object):
                     self._model_classes.append(obj)
                 elif issubclass(obj, BaseData):
                     self._data_classes.append(obj)
+                elif issubclass(obj, BaseEvent):
+                    self._event_classes.append(obj)
                 else:
                     self._struct_classes.append(obj)
             elif isinstance(obj, Reward):
@@ -114,6 +117,7 @@ class DataLoader(object):
             DataClasses=[cls.to_dict() for cls in self._data_classes],
             ModelClasses=[cls.to_dict() for cls in self._model_classes],
             StructClasses=[cls.to_dict() for cls in self._struct_classes],
+            EventClasses=[cls.to_dict() for cls in self._event_classes],
             StorageClasses=[(st_type, cls.to_dict()) for (st_type, cls) in self._storage_classes],
             DataClassInstances=data_class_instances,
             Inventories=[inv.to_dict() for inv in Inventory.all()],

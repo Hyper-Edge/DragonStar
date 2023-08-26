@@ -2,6 +2,7 @@ from .types import optional_field
 from .base import StructModel
 from .data import DataRef, BaseData
 from .models import *
+from .event import BaseEvent
 from .inventory import Inventory
 from .reward import Reward
 from .cost import Cost

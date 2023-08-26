@@ -163,6 +163,7 @@ class AppDefDTO(pydantic.BaseModel):
     DataClasses: typing.List[DataClassDTO]
     ModelClasses: typing.List[DataClassDTO]
     StructClasses: typing.List[DataClassDTO]
+    EventClasses: typing.List[DataClassDTO]
     StorageClasses: typing.List[typing.Tuple[int, DataClassDTO]]
     DataClassInstances: typing.Dict[str, typing.List[DataClassInstanceDTO]]
     Inventories: typing.List[InventoryDefDTO]
