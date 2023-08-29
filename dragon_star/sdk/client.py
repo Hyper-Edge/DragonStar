@@ -6,6 +6,7 @@ import ulid
 
 from dragon_star.sdk.ws import HeWsClient
 from dragon_star.sdk.models.data import DataRef
+from dragon_star.sdk.models.types import optional_field
 
 
 _EMPTY_ULID = ulid.ULID(bytes(16))
@@ -110,6 +111,7 @@ class GenericLadderLevelDTO(pydantic.BaseModel):
 
 class GenericLadderDTO(pydantic.BaseModel):
     Name: str
+    LadderType: str
     ProgressionId: typing.Optional[str]
     ProgressionName: str
     Levels: typing.List[GenericLadderLevelDTO]
@@ -141,10 +143,8 @@ class TournamentDTO(pydantic.BaseModel):
 class EnergySystemDTO(pydantic.BaseModel):
     Id: typing.Optional[str]
     Name: str
-    InitialValue: int
-    RegenValue: int
-    RegenRate: int
-    MaxCapacity: int
+    Data: DataClassDTO
+    Model: DataClassDTO
 
 
 class RequestHandlerDTO(pydantic.BaseModel):
@@ -154,6 +154,14 @@ class RequestHandlerDTO(pydantic.BaseModel):
     ResponseClassId: typing.Optional[str]
     RequestClassName: str
     ResponseClassName: str
+    Code: str
+
+
+class EventHandlerDTO(pydantic.BaseModel):
+    Id: typing.Optional[str]
+    Name: str
+    EventClassId: typing.Optional[str]
+    EventClassName: str
     Code: str
 
 
@@ -176,6 +184,7 @@ class AppDefDTO(pydantic.BaseModel):
     Rewards: typing.List[RewardDTO]
     EnergySystems: typing.List[EnergySystemDTO]
     RequestHandlers: typing.List[RequestHandlerDTO]
+    EventHandlers: typing.List[EventHandlerDTO]
 
 
 class ExportAppRequest(pydantic.BaseModel):

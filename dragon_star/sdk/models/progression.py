@@ -13,8 +13,8 @@ class GenericLadderLevel(BaseData):
         super().__init__(id=id_, **kwargs)
 
     Level: int = optional_field(0)
-    Reward: typing.Optional[Reward] = None
-    Cost: typing.Optional[Cost] = None
+    Reward: typing.Optional[Reward]
+    Cost: typing.Optional[Cost]
     Conditions: typing.List[str] = optional_field(list())
 
     def to_dict(self):
@@ -22,7 +22,7 @@ class GenericLadderLevel(BaseData):
             Reward=self.Reward.to_dict() if self.Reward else None,
             Cost=self.Cost.to_dict() if self.Cost else None,
             Conditions=self.Conditions,
-            Data=self.Data.to_dict()
+            Data=self.Data.to_dict() if hasattr(self, 'Data') else None
         )
 
 
@@ -37,18 +37,21 @@ class GenericExpLadderLevel(GenericLadderLevel):
 
 class GenericLadderBase(BaseData):
     Name: str
+    LadderType: str
     ProgressionId: typing.Optional[str]
     ProgressionName: str
     Levels: typing.List[GenericLadderLevel]
 
     def add_level(self, **kwargs):
         curr_lvl = len(self.Levels)
+        print(kwargs)
         ll = self.FullLadderLevelData(Level=curr_lvl, **kwargs)
         self.Levels.append(ll)
 
     def to_dict(self):
         return dict(
             Name=self.Name,
+            LadderType=self.LadderType,
             ProgressionId=self.ProgressionId,
             ProgressionName=self.ProgressionName,
             Levels=[l.to_dict() for l in self.Levels]
@@ -107,6 +110,7 @@ class ProgressionLadder(BaseData):
         return self.ladder_class.define(
             id=f'{self.id}_{inflection.underscore(name)}',
             Name=name,
+            LadderType='Ladder',
             ProgressionName=f"Progression{self.EntityName}{self.LevelField}",
             FullLadderLevelData=self.ladder_level_data_class,
             Levels=list())
