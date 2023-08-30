@@ -124,6 +124,15 @@ class BattlePassDTO(pydantic.BaseModel):
     Data: typing.Optional[DataClassFieldsDTO]
 
 
+class BattlePassInstanceDTO(pydantic.BaseModel):
+    Id: typing.Optional[str]
+    Name: str
+    BattlePassId: typing.Optional[str]
+    BattlePassName: str
+    Fields: typing.List[DataClassInstanceFieldDTO]
+    Levels: typing.List[GenericLadderLevelDTO]
+
+
 class QuestDTO(pydantic.BaseModel):
     Name: str
     AcceptConditions: typing.List[str]
@@ -178,6 +187,7 @@ class AppDefDTO(pydantic.BaseModel):
     Quests: typing.List[QuestDTO]
     Tournaments: typing.List[TournamentDTO]
     BattlePasses: typing.List[BattlePassDTO]
+    BattlePassInstances: typing.List[BattlePassInstanceDTO]
     Progressions: typing.List[ProgressionSystemDTO]
     ProgressionLadders: typing.List[GenericLadderDTO]
     CraftRules: typing.List[CraftRulesDTO]

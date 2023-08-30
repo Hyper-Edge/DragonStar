@@ -1,6 +1,25 @@
 from .base import _BaseModel
+from .data import DataRef
 from .progression import *
 from .types import optional_field
+
+
+class BattlePassInstance(_BaseModel):
+    Name: str
+    BattlePassName: str
+    Data: BaseData
+    Ladder: GenericExpLadder
+
+    def to_dict(self):
+        return dict(
+            Name=f'{self.BattlePassName}_{self.Name}',
+            BattlePassName=self.BattlePassName,
+            Fields=self.Data.to_dict()['Fields'],
+            Levels=self.Ladder.to_dict()['Levels']
+        )
+
+    def add_level(self, **kwargs):
+        return self.Ladder.add_level(**kwargs)
 
 
 class BattlePass(_BaseModel):
@@ -29,14 +48,21 @@ class BattlePass(_BaseModel):
         self.FullLadderClass = pydantic.create_model(cls_name, **dyn_cls_args)
         return self.FullLadderClass
 
-    def define(self, name: str):
-        return self.ladder_class.define(
+    def define(self, name: str, **kwargs):
+        ladder = self.ladder_class.define(
             id=f'{inflection.underscore(self.name)}_battle_pass_ladder_{inflection.underscore(name)}',
             Name=name,
             LadderType='BattlePass',
             ProgressionName=self.Name,
             FullLadderLevelData=self.ladder_level_data_class,
             Levels=list())
+        #
+        inst = self.data_class.define(Name=name, **kwargs)
+        return BattlePassInstance(
+            Name=name,
+            BattlePassName=self.name,
+            Data=inst,
+            Ladder=ladder)
 
     @property
     def model_class(self) -> typing.Type[DataModel]:
@@ -63,6 +89,7 @@ class BattlePass(_BaseModel):
             dyn_cls_args = dict(__base__=BaseData)
         if 'Name' not in dyn_cls_args:
             dyn_cls_args['Name'] = (str, ...)
+        #dyn_cls_args['Ladder'] = (DataRef[self.ladder_class], ...)
         #
         self.FullDataClass = pydantic.create_model(cls_name, **dyn_cls_args)
         return self.FullDataClass
