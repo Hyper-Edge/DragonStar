@@ -7,6 +7,7 @@ import ulid
 from dragon_star.sdk.ws import HeWsClient
 from dragon_star.sdk.models.data import DataRef
 from dragon_star.sdk.models.types import optional_field
+from dragon_star.sdk.models.abilities import AbilityGraphDTO
 
 
 _EMPTY_ULID = ulid.ULID(bytes(16))
@@ -172,6 +173,21 @@ class EventHandlerDTO(pydantic.BaseModel):
     EventClassId: typing.Optional[str]
     EventClassName: str
     Code: str
+    
+    
+class AbilitySystemDTO(pydantic.BaseModel):
+    Id: typing.Optional[str]
+    Name: str
+    Stats: typing.List[DataClassFieldDTO]
+    Actors: typing.List[str]
+
+
+class AbilityNodeDTO(pydantic.BaseModel):
+    Id: typing.Optional[str]
+    Name: str
+    Base: typing.Optional[str]
+    Category: str
+    Code: str
 
 
 class AppDefDTO(pydantic.BaseModel):
@@ -195,6 +211,9 @@ class AppDefDTO(pydantic.BaseModel):
     EnergySystems: typing.List[EnergySystemDTO]
     RequestHandlers: typing.List[RequestHandlerDTO]
     EventHandlers: typing.List[EventHandlerDTO]
+    AbilitySystems: typing.List[AbilitySystemDTO]
+    AbilityGraphs: typing.List[AbilityGraphDTO]
+    AbilityNodes: typing.List[AbilityNodeDTO]
 
 
 class ExportAppRequest(pydantic.BaseModel):

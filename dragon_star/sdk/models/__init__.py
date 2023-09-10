@@ -18,3 +18,4 @@ from .storage import \
     UserStorage
 from .tournament import Tournament
 from .handler import Handler
+from .abilities import *

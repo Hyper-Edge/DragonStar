@@ -44,6 +44,9 @@ class DataLoader(object):
         self._tournaments: typing.List[Tournament] = []
         self._request_handlers: typing.List[Handler] = []
         self._event_handlers: typing.List[EventHandler] = []
+        self._ability_graphs: typing.List[AbilityGraph] = []
+        self._ability_systems: typing.List[AbilitySystem] = []
+        self._ability_nodes: typing.List[AbilityNode] = []
 
         self.iterate_dataclasses(package_name)
 
@@ -92,6 +95,8 @@ class DataLoader(object):
                 self._request_handlers.append(obj)
             elif isinstance(obj, EventHandler):
                 self._event_handlers.append(obj)
+            elif isinstance(obj, AbilityGraph):
+                self._ability_graphs.append(obj)
 
     def iterate_dataclasses(self, package_name: str):
         package = importlib.import_module(package_name)
@@ -138,5 +143,8 @@ class DataLoader(object):
             Rewards=[r.to_dict() for r in self._rewards],
             EnergySystems=[es.to_dict() for es in self._energy_systems],
             RequestHandlers=[h.to_dict() for h in self._request_handlers],
-            EventHandlers=[h.to_dict() for h in self._event_handlers]
+            EventHandlers=[h.to_dict() for h in self._event_handlers],
+            AbilityGraphs=[g.to_dict() for g in self._ability_graphs],
+            AbilitySystems=[s.to_dict() for s in self._ability_systems],
+            AbilityNodes=[n.to_dict() for n in self._ability_nodes]
         )

@@ -91,20 +91,13 @@ UpgradeBuildingHandler = Handler(
     ResponseClass=UpgradeBuildingResp)
 
 UpgradeBuildingHandler.Code = """
-return new UpgradeBuildingResp { Success = true };
-"""
-
-#FIXME
-_FIXME_IMPL = """
 var failResp = new UpgradeBuildingResp { Success = false };
 
 var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
 var building =  user.GetBuilding(req.BuildingId);
-var buildingData = GameDb.GetBuildingData(building.Data);
-var buildingLevelLadderData = GameDb.GetBuildingLevelLadderData(buildingData.Ladder);
 
-//???
-if (!UpgradeService.DoUpgrade(building))
+var upgradeHelper = new UpgradeLadderHelper(GameContext, GameDb);
+if (!upgradeHelper.UpgradeLevel(user, building))
 {
     return failResp;
 }
