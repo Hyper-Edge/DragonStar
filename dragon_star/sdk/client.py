@@ -167,6 +167,14 @@ class RequestHandlerDTO(pydantic.BaseModel):
     Code: str
 
 
+class JobHandlerDTO(pydantic.BaseModel):
+    Id: typing.Optional[str]
+    Name: str
+    JobDataClassId: typing.Optional[str]
+    JobDataClassName: str
+    Code: str
+
+
 class EventHandlerDTO(pydantic.BaseModel):
     Id: typing.Optional[str]
     Name: str
@@ -190,6 +198,20 @@ class AbilityNodeDTO(pydantic.BaseModel):
     Code: str
 
 
+class MultiPlayerSystemDTO(pydantic.BaseModel):
+    Id: typing.Optional[str]
+    Name: str
+    NetEntities: typing.List[str]
+    #InputKeys
+
+
+class NetEntityDTO(pydantic.BaseModel):
+    Id: typing.Optional[str]
+    Name: str
+    SyncedFields: typing.List[DataClassFieldDTO]
+    Fields: typing.List[DataClassFieldDTO]
+
+
 class AppDefDTO(pydantic.BaseModel):
     Id: typing.Optional[str]
     Name: str
@@ -210,10 +232,15 @@ class AppDefDTO(pydantic.BaseModel):
     Rewards: typing.List[RewardDTO]
     EnergySystems: typing.List[EnergySystemDTO]
     RequestHandlers: typing.List[RequestHandlerDTO]
+    JobHandlers: typing.List[JobHandlerDTO]
     EventHandlers: typing.List[EventHandlerDTO]
+    #
     AbilitySystems: typing.List[AbilitySystemDTO]
     AbilityGraphs: typing.List[AbilityGraphDTO]
     AbilityNodes: typing.List[AbilityNodeDTO]
+    #
+    NetEntities: typing.List[NetEntityDTO]
+    MultiPlayerSystems: typing.List[MultiPlayerSystemDTO]
 
 
 class ExportAppRequest(pydantic.BaseModel):

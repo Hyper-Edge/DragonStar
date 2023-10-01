@@ -43,10 +43,13 @@ class DataLoader(object):
         self._energy_systems: typing.List[EnergySystem] = []
         self._tournaments: typing.List[Tournament] = []
         self._request_handlers: typing.List[Handler] = []
+        self._job_handlers: typing.List[Job] = []
         self._event_handlers: typing.List[EventHandler] = []
         self._ability_graphs: typing.List[AbilityGraph] = []
         self._ability_systems: typing.List[AbilitySystem] = []
         self._ability_nodes: typing.List[AbilityNode] = []
+        self._net_entities: typing.List[NetEntity] = []
+        self._mp_systems: typing.List[MultiPlayerSystem] = []
 
         self.iterate_dataclasses(package_name)
 
@@ -93,6 +96,8 @@ class DataLoader(object):
                 self._tournaments.append(obj)
             elif isinstance(obj, Handler):
                 self._request_handlers.append(obj)
+            elif isinstance(obj, Job):
+                self._job_handlers.append(obj)
             elif isinstance(obj, EventHandler):
                 self._event_handlers.append(obj)
             elif isinstance(obj, AbilityGraph):
@@ -143,8 +148,13 @@ class DataLoader(object):
             Rewards=[r.to_dict() for r in self._rewards],
             EnergySystems=[es.to_dict() for es in self._energy_systems],
             RequestHandlers=[h.to_dict() for h in self._request_handlers],
+            JobHandlers=[h.to_dict() for h in self._job_handlers],
             EventHandlers=[h.to_dict() for h in self._event_handlers],
+            #
             AbilityGraphs=[g.to_dict() for g in self._ability_graphs],
             AbilitySystems=[s.to_dict() for s in self._ability_systems],
-            AbilityNodes=[n.to_dict() for n in self._ability_nodes]
+            AbilityNodes=[n.to_dict() for n in self._ability_nodes],
+            #
+            NetEntities=[e.to_dict() for e in self._net_entities],
+            MultiPlayerSystems=[mp.to_dict() for mp in self._mp_systems]
         )

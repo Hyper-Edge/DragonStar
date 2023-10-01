@@ -4,12 +4,12 @@ from dragon_star.sdk.models.progression import ProgressionLadder
 from dragon_star.sdk.models import DataModel, DataRef
 
 
-class BuildingBase(DataModel):
+class Building(DataModel):
     Level: int = 0
 
 
 #######################################
-class BuildingCastle(BuildingBase):
+class BuildingCastle(Building):
     Data: DataRef[CastleBuildingData]
 
 
@@ -26,7 +26,7 @@ CastleBuildingLadder = ProgressionLadder(
 #######################################
 # Market
 #######################################
-class BuildingMarket(BuildingBase):
+class BuildingMarket(Building):
     Data: DataRef[MarketBuildingData]
 
 
@@ -41,7 +41,7 @@ MarketBuildingLadder = ProgressionLadder(
 
 
 #######################################
-class BuildingMine(BuildingBase):
+class BuildingMine(Building):
     Data: DataRef[MiningBuildingData]
 
 
@@ -58,7 +58,7 @@ MineBuildingLadder = ProgressionLadder(
 #######################################
 # Incubator
 #######################################
-class BuildingIncubator(BuildingBase):
+class BuildingIncubator(Building):
     Data: DataRef[IncubatorBuildingData]
 
 
@@ -75,7 +75,7 @@ IncubatorBuildingLadder = ProgressionLadder(
 #######################################
 # Academy
 #######################################
-class BuildingAcademy(BuildingBase):
+class BuildingAcademy(Building):
     Data: DataRef[AcademyBuildingData]
 
 
@@ -89,14 +89,14 @@ AcademyBuildingLadder = ProgressionLadder(
 
 
 #######################################
-class BuildingForgery(BuildingBase):
+class BuildingForgery(Building):
     pass
 
 
 #######################################
 # Nest
 #######################################
-class BuildingNest(BuildingBase):
+class BuildingNest(Building):
     Data: DataRef[NestBuildingData]
 
 
