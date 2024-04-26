@@ -1,6 +1,6 @@
 import typing
 
-from dragon_star.sdk.models import BaseData
+from hyperedge.sdk.models import BaseData
 
 
 class TierData(BaseData):

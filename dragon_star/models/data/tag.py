@@ -1,4 +1,4 @@
-from dragon_star.sdk.models import BaseData, DataRef
+from hyperedge.sdk.models import BaseData, DataRef
 
 
 class TagData(BaseData):

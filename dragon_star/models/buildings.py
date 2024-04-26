@@ -1,7 +1,7 @@
 from dragon_star.models.data.buildings.base import *
 
-from dragon_star.sdk.models.progression import ProgressionLadder
-from dragon_star.sdk.models import DataModel, DataRef
+from hyperedge.sdk.models.progression import ProgressionLadder
+from hyperedge.sdk.models import DataModel, DataRef
 
 
 class Building(DataModel):

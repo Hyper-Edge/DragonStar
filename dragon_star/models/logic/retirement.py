@@ -1,6 +1,6 @@
-from dragon_star.sdk.models.types import Ulid
-from dragon_star.sdk.models.base import _BaseModel
-from dragon_star.sdk.models.handler import Handler
+from hyperedge.sdk.models.types import Ulid
+from hyperedge.sdk.models.base import _BaseModel
+from hyperedge.sdk.models.handler import Handler
 
 
 class RetireDragonReq(_BaseModel):
@@ -16,31 +16,6 @@ RetireDragonHandler = Handler(
     RequestClass=RetireDragonReq,
     ResponseClass=RetireDragonResp)
 
-RetireDragonHandler.Code = """
-var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
-var dragon =  user.GetDragon(req.DragonId);
-
-var failResp = new RetireDragonResp { Success = false };
-
-if (dragon is null)
-{
-    return failResp;
-}
-
-var dragonData = GameDb.GetDragonData(dragon.Data);
-if (!user.RemoveDragon(dragon))
-{
-    return failResp;
-}
-
-if (!GameContext.GiveReward(user, dragonData.RetirementReward))
-{
-    return failResp;
-}
-
-return new RetireDragonResp { Success = true };
-"""
-
 
 class RecycleDragonEquipmentReq(_BaseModel):
     DragonEquipmentId: Ulid
@@ -55,27 +30,3 @@ RecycleDragonEquipmentHandler = Handler(
     RequestClass=RecycleDragonEquipmentReq,
     ResponseClass=RecycleDragonEquipmentResp)
 
-RecycleDragonEquipmentHandler.Code = """
-var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
-var de =  user.GetDragonEquippable(req.DragonEquipmentId);
-
-var failResp = new RecycleDragonEquipmentResp { Success = false };
-
-if (de is null)
-{
-    return failResp;
-}
-
-var deData = GameDb.GetDragonEquippableData(de.Data);
-if (!user.RemoveDragonEquippable(de))
-{
-    return failResp;
-}
-
-if (!GameContext.GiveReward(user, deData.RecycleReward))
-{
-    return failResp;
-}
-
-return new RecycleDragonEquipmentResp { Success = true };
-"""

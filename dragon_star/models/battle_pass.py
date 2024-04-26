@@ -1,5 +1,5 @@
-from dragon_star.sdk.models.battle_pass import BattlePass
-from dragon_star.sdk.models.reward import Reward
+from hyperedge.sdk.models.battle_pass import BattlePass
+from hyperedge.sdk.models.reward import Reward
 
 from dragon_star.models.data.currency import *
 

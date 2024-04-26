@@ -1,6 +1,6 @@
-from dragon_star.sdk.models.data import BaseData, DataRef
-from dragon_star.sdk.models.reward import Reward
-from dragon_star.sdk.models.progression import GenericLadder
+from hyperedge.sdk.models.data import BaseData, DataRef
+from hyperedge.sdk.models.reward import Reward
+from hyperedge.sdk.models.progression import GenericLadder
 
 
 class BuildingData(BaseData):

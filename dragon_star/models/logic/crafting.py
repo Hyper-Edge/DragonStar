@@ -1,8 +1,8 @@
 import typing
 
-from dragon_star.sdk.models.types import Ulid
-from dragon_star.sdk.models.base import _BaseModel
-from dragon_star.sdk.models.handler import Handler
+from hyperedge.sdk.models.types import Ulid
+from hyperedge.sdk.models.base import _BaseModel
+from hyperedge.sdk.models.handler import Handler
 
 
 class CraftDragonEquipmentReq(_BaseModel):
@@ -18,14 +18,3 @@ CraftDragonEquipmentHandler = Handler(
     RequestClass=CraftDragonEquipmentReq,
     ResponseClass=CraftDragonEquipmentResp)
 
-
-CraftDragonEquipmentHandler.Code = """
-var failResp = new CraftDragonEquipmentResp { Success = false };
-var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
-var craftSuccess = await GameContext.CraftItems(user, (CraftSystem.Types)req.CraftId);
-if (!craftSuccess)
-{
-    return failResp;
-}
-return new CraftDragonEquipmentResp { Success = true };
-"""

@@ -1,4 +1,4 @@
-from dragon_star.sdk.models import DataModel, DataRef
+from hyperedge.sdk.models import DataModel, DataRef
 from dragon_star.models.data.equips.equippables.equippable import DragonEquippableData
 
 

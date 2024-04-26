@@ -1,7 +1,7 @@
 from dragon_star.models.data.dragons.dragon import *
 from dragon_star.models.dragons import *
 from dragon_star.models.data.ladders.dragons.tier1 import BasicDragonCommonLadder
-from dragon_star.sdk.utils import to_underscore
+from hyperedge.sdk.utils import to_underscore
 
 
 for dragon_type in BASIC_DRAGONS:

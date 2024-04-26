@@ -1,6 +1,6 @@
 from dragon_star.models.data.dragons.dragon import *
 from dragon_star.models.data.slots.equip_slots.element_slots import *
-from dragon_star.sdk.utils import to_underscore
+from hyperedge.sdk.utils import to_underscore
 from .tier1_basic import BasicDragonCommonLadder
 
 

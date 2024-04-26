@@ -1,6 +1,6 @@
 import typing
 
-from dragon_star.sdk.models import *
+from hyperedge.sdk.models import *
 from dragon_star.models.data.tier import TierData
 from dragon_star.models.data.slots.equip_slots.equip_slot import DragonEquipSlotData
 

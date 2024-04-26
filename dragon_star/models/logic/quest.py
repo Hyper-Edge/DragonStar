@@ -1,8 +1,8 @@
 import typing
 
-from dragon_star.sdk.models.types import Ulid
-from dragon_star.sdk.models.base import _BaseModel
-from dragon_star.sdk.models.handler import Handler
+from hyperedge.sdk.models.types import Ulid
+from hyperedge.sdk.models.base import _BaseModel
+from hyperedge.sdk.models.handler import Handler
 
 
 class ClaimQuestRewardReq(_BaseModel):
@@ -18,30 +18,3 @@ ClaimQuestRewardHandler = Handler(
     RequestClass=ClaimQuestRewardReq,
     ResponseClass=ClaimQuestRewardResp)
 
-ClaimQuestRewardHandler.Code = """
-var failResp = new ClaimQuestRewardResp { Success = false };
-
-var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
-var quest = user.GetQuest(req.QuestId);
-
-if (!quest.Finished)
-{
-    return failResp;
-}
-
-if (quest.RewardClaimed)
-{
-    return failResp;
-}
-
-var questData = GameDb.GetQuestData(quest.Data);
-if (!GameContext.GiveReward(user, questData.Quest.Reward))
-{
-    return failResp;
-}
-
-quest.RewardClaimed = true;
-user.UpdateQuest(quest);
-
-return new ClaimQuestRewardResp { Success = true };
-"""

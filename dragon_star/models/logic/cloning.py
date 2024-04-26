@@ -1,8 +1,8 @@
 import typing
 
-from dragon_star.sdk.models.types import Ulid
-from dragon_star.sdk.models.base import _BaseModel
-from dragon_star.sdk.models.handler import Handler
+from hyperedge.sdk.models.types import Ulid
+from hyperedge.sdk.models.base import _BaseModel
+from hyperedge.sdk.models.handler import Handler
 
 
 class CloneDragonReq(_BaseModel):
@@ -18,6 +18,3 @@ CloneDragonHandler = Handler(
     RequestClass=CloneDragonReq,
     ResponseClass=CloneDragonResp)
 
-CloneDragonHandler.Code = """
-return new CloneDragonResp { Success = true };
-"""

@@ -1,7 +1,7 @@
 import pydantic
 import typing
 
-from dragon_star.sdk.models import BaseData, DataRef, optional_field
+from hyperedge.sdk.models import BaseData, DataRef, optional_field
 
 
 class ElementData(BaseData):

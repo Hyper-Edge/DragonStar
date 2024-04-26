@@ -1,5 +1,5 @@
-from dragon_star.sdk.models import BaseData, DataRef
-from dragon_star.sdk.models.crafting import CraftRule
+from hyperedge.sdk.models import BaseData, DataRef
+from hyperedge.sdk.models.crafting import CraftRule
 
 from dragon_star.models.data.slots.equip_slots.element_slots import *
 from dragon_star.models.data.equips.equippables.equippable import DragonEquippableData

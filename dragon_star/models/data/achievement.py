@@ -1,5 +1,5 @@
-from dragon_star.sdk.models import BaseData
-from dragon_star.sdk.models.reward import Reward
+from hyperedge.sdk.models import BaseData
+from hyperedge.sdk.models.reward import Reward
 
 
 class AchievementData(BaseData):

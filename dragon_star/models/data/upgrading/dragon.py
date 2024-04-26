@@ -1,4 +1,4 @@
-from dragon_star.sdk.models import BaseData, DataRef
+from hyperedge.sdk.models import BaseData, DataRef
 from dragon_star.models.data.element import *
 from dragon_star.models.data.affinity import *
 from dragon_star.models.data.tier import *

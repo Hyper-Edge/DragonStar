@@ -1,4 +1,4 @@
-from dragon_star.sdk.models.energy_system import EnergySystem
+from hyperedge.sdk.models.energy_system import EnergySystem
 
 
 LevelEnergy = EnergySystem(Name='LevelEnergy')
