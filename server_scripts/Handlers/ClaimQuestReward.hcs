@@ -1,0 +1,11 @@
+
+var failResp = new ClaimQuestRewardResp { Success = false };
+
+var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
+var quest = user.GetQuest(req.QuestId);
+
+if (!GameContext.ClaimQuestReward(user, quest)) {
+    return failResp;
+}
+
+return new ClaimQuestRewardResp { Success = true };

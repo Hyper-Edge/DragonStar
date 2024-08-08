@@ -1,0 +1,13 @@
+
+var failResp = new UpgradeBuildingResp { Success = false };
+
+var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
+var building =  user.GetBuilding(req.BuildingId);
+
+var upgradeHelper = GameContext.GetUpgradeLadderHelper();
+if (!upgradeHelper.UpgradeLevel(user, building))
+{
+    return failResp;
+}
+
+return new UpgradeBuildingResp { Success = true };

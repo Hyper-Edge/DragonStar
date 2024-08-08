@@ -1,0 +1,12 @@
+Console.WriteLine($"Registered new user with Id: {req.UserId.ToString()}");
+var user = await req.GameContext.GetUserAsync(req.UserId);
+var bp = RegularBattlePass.Create();
+user.AddBattlePass(bp);
+//
+var es = LevelEnergyEnergySystem.Create(LevelEnergyEnergySystemData.Types.USERLEVELENERGY);
+user.AddEnergySystem(es);
+//
+var useEnergyQuest = UseEnergyQuest.Create(UseEnergyQuestData.Types.USE20ENERGYPOINTS);
+user.AddQuest(useEnergyQuest);
+user.AddNodeFlow(NodeFlowGraphs.LEVEL_ENERGY_USED_GRAPH);
+

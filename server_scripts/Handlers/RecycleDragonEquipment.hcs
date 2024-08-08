@@ -1,0 +1,23 @@
+
+var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
+var de =  user.GetDragonEquippable(req.DragonEquipmentId);
+
+var failResp = new RecycleDragonEquipmentResp { Success = false };
+
+if (de is null)
+{
+    return failResp;
+}
+
+var deData = GameDb.GetDragonEquippableData(de.Data);
+if (!user.RemoveDragonEquippable(de))
+{
+    return failResp;
+}
+
+if (!GameContext.GiveReward(user, deData.RecycleReward))
+{
+    return failResp;
+}
+
+return new RecycleDragonEquipmentResp { Success = true };

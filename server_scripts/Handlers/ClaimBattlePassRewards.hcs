@@ -1,0 +1,12 @@
+
+var failResp = new ClaimBattlePassRewardsResp { Success = false };
+
+var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
+var bp = user.GetBattlePass(req.BpId);
+
+if (!GameContext.ClaimBattlePassReward(bp, user, req.Level))
+{
+    return failResp;
+}
+
+return new ClaimBattlePassRewardsResp { Success = true };

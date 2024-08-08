@@ -1,0 +1,23 @@
+
+var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
+var dragon =  user.GetDragon(req.DragonId);
+
+var failResp = new RetireDragonResp { Success = false };
+
+if (dragon is null)
+{
+    return failResp;
+}
+
+var dragonData = GameDb.GetDragonData(dragon.Data);
+if (!user.RemoveDragon(dragon))
+{
+    return failResp;
+}
+
+if (!GameContext.GiveReward(user, dragonData.RetirementReward))
+{
+    return failResp;
+}
+
+return new RetireDragonResp { Success = true };

@@ -1,0 +1,9 @@
+
+var failResp = new CraftDragonEquipmentResp { Success = false };
+var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
+var craftSuccess = await GameContext.CraftItems(user, (CraftSystem.Instances)req.CraftId);
+if (!craftSuccess)
+{
+    return failResp;
+}
+return new CraftDragonEquipmentResp { Success = true };

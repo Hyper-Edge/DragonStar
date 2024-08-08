@@ -1,0 +1,7 @@
+var user = await GameContext.GetUserAsync(GameContext.CurrentUserId);
+var failResp = new UseEnergyResp { Success = false };
+if (!GameContext.UseEnergy(user, user.EnergySystems.First(), (ulong)req.Amount))
+{
+    return failResp;
+}
+return new UseEnergyResp { Success = true };
