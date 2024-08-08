@@ -6,7 +6,7 @@ from hyperedge.sdk.models import BaseData, DataRef, optional_field
 
 class ElementData(BaseData):
     Name: str
-    HasStone: bool = optional_field(False)
+    HasStone: typing.Optional[bool]
 
 
 ELEMENT_FIRE = ElementData.define(
@@ -17,14 +17,17 @@ ELEMENT_FIRE = ElementData.define(
 ELEMENT_WIND = ElementData.define(
     Name='Wind'
 )
+
 ELEMENT_GEO = ElementData.define(
     Name='Geo',
     HasStone=True
 )
+
 ELEMENT_WATER = ElementData.define(
     Name='Water',
     HasStone=True
 )
+
 ELEMENT_ELECTRO = ElementData.define(
     Name='Electro'
 )
